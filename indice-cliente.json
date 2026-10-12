@@ -1,0 +1,281 @@
+[
+  {
+    "arquivo": "artigos/cliente/criar-conta.html",
+    "titulo": "Criar a sua conta",
+    "resumo": "Cadastro com e-mail e senha, para entrar em filas e agendar.",
+    "palavras": [
+      "cadastro",
+      "criar conta",
+      "conta grátis",
+      "registrar",
+      "começar"
+    ],
+    "categoria": "Primeiros passos",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/entrar-na-conta.html",
+    "titulo": "Entrar na sua conta",
+    "resumo": "Como fazer login com e-mail e senha.",
+    "palavras": [
+      "login",
+      "entrar",
+      "acessar",
+      "e-mail",
+      "senha"
+    ],
+    "categoria": "Primeiros passos",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/esqueci-a-senha.html",
+    "titulo": "Esqueci a senha",
+    "resumo": "Receba no e-mail um código para criar uma senha nova.",
+    "palavras": [
+      "senha",
+      "esqueci",
+      "recuperar",
+      "redefinir",
+      "código"
+    ],
+    "categoria": "Conta e senha",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/encontrar-uma-loja.html",
+    "titulo": "Encontrar uma loja",
+    "resumo": "Buscar por serviço ou lugar, filtrar por categoria e salvar favoritas.",
+    "palavras": [
+      "buscar",
+      "loja",
+      "estabelecimento",
+      "barbearia",
+      "salão",
+      "favoritos",
+      "perto de você",
+      "pra ontem"
+    ],
+    "categoria": "Primeiros passos",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/entrar-na-fila.html",
+    "titulo": "Entrar na fila",
+    "resumo": "Escolher o serviço e entrar na fila com menor espera ou com um profissional.",
+    "palavras": [
+      "fila",
+      "entrar na fila",
+      "menor espera",
+      "profissional",
+      "serviço",
+      "check-in"
+    ],
+    "categoria": "Entrar na fila",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/acompanhar-a-vez.html",
+    "titulo": "Acompanhar a sua vez",
+    "resumo": "A tela da fila: quantos faltam, o tempo estimado e quando ir para a loja.",
+    "palavras": [
+      "vez",
+      "posição",
+      "tempo estimado",
+      "quantos faltam",
+      "você é o próximo",
+      "atendimento"
+    ],
+    "categoria": "Entrar na fila",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/mudar-minha-vez.html",
+    "titulo": "Mudar a minha vez",
+    "resumo": "Ir para o fim da fila ou trocar de lugar com alguém que está atrás.",
+    "palavras": [
+      "mudar minha vez",
+      "trocar",
+      "troca",
+      "adiar",
+      "fim da fila",
+      "pedidos de troca"
+    ],
+    "categoria": "Entrar na fila",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/sair-da-fila.html",
+    "titulo": "Sair da fila",
+    "resumo": "Dois toques seguidos em Sair da fila, e quando a saída tem multa.",
+    "palavras": [
+      "sair da fila",
+      "cancelar",
+      "desistir",
+      "multa",
+      "sem custo"
+    ],
+    "categoria": "Entrar na fila",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/solicitar-corte.html",
+    "titulo": "Agendar um horário",
+    "resumo": "Pedir um horário ao profissional que atende só com agenda.",
+    "palavras": [
+      "agendar",
+      "agenda",
+      "horário",
+      "solicitar corte",
+      "pedido",
+      "agendar para depois"
+    ],
+    "categoria": "Agendar",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/atrasos.html",
+    "titulo": "Atrasos: o que acontece",
+    "resumo": "Chamado e não chegou: troca de lugar no 1º e 2º atraso, multa no 3º.",
+    "palavras": [
+      "atraso",
+      "atrasado",
+      "não chegou",
+      "chamado",
+      "3º atraso",
+      "adiar minha vez"
+    ],
+    "categoria": "Atrasos e multas",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/multas.html",
+    "titulo": "Multas: quando e como são cobradas",
+    "resumo": "As duas situações com multa e onde o valor aparece.",
+    "palavras": [
+      "multa",
+      "cobrança",
+      "valor",
+      "pagar",
+      "próximo atendimento"
+    ],
+    "categoria": "Atrasos e multas",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/notificacoes.html",
+    "titulo": "Avisos da sua vez",
+    "resumo": "Ligar as notificações para saber quando a vez está chegando.",
+    "palavras": [
+      "notificação",
+      "aviso",
+      "push",
+      "sua vez está chegando",
+      "é quase a sua vez",
+      "permitir"
+    ],
+    "categoria": "Notificações",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/nao-recebo-avisos.html",
+    "titulo": "Não recebo os avisos",
+    "resumo": "Liberar as notificações do Vupth nas configurações do Android.",
+    "palavras": [
+      "não recebo",
+      "notificação",
+      "aviso",
+      "permissão",
+      "android",
+      "silencioso"
+    ],
+    "categoria": "Problemas comuns",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/preparando-servidor.html",
+    "titulo": "“Preparando servidor...” ao abrir",
+    "resumo": "A primeira abertura pode levar até um minuto.",
+    "palavras": [
+      "preparando servidor",
+      "demora",
+      "lento",
+      "carregando",
+      "abrir o app"
+    ],
+    "categoria": "Problemas comuns",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/avaliar-atendimento.html",
+    "titulo": "Avaliar o atendimento",
+    "resumo": "Dar a sua nota depois que o atendimento termina.",
+    "palavras": [
+      "avaliar",
+      "avaliação",
+      "nota",
+      "estrelas",
+      "atendimento concluído"
+    ],
+    "categoria": "Entrar na fila",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/dados-pessoais.html",
+    "titulo": "Editar os seus dados",
+    "resumo": "Nome, celular, e-mail, senha e endereços.",
+    "palavras": [
+      "dados pessoais",
+      "perfil",
+      "nome",
+      "celular",
+      "e-mail",
+      "senha",
+      "endereço",
+      "editar"
+    ],
+    "categoria": "Conta e senha",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/aparencia.html",
+    "titulo": "Tema e tamanho da fonte",
+    "resumo": "Deixar o app claro ou escuro e o texto maior.",
+    "palavras": [
+      "aparência",
+      "tema",
+      "escuro",
+      "claro",
+      "fonte",
+      "tamanho da letra"
+    ],
+    "categoria": "Conta e senha",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/excluir-conta.html",
+    "titulo": "Excluir a sua conta",
+    "resumo": "Apagar a conta e os seus dados do Vupth.",
+    "palavras": [
+      "excluir conta",
+      "apagar conta",
+      "deletar",
+      "dados",
+      "privacidade"
+    ],
+    "categoria": "Conta e senha",
+    "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/compartilhar-loja.html",
+    "titulo": "Indicar uma loja",
+    "resumo": "Copiar o link da loja para mandar a alguém.",
+    "palavras": [
+      "compartilhar",
+      "link",
+      "indicar",
+      "copiar link"
+    ],
+    "categoria": "Primeiros passos",
+    "publico": "cliente"
+  }
+]

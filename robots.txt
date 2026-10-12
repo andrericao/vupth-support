@@ -1,0 +1,3 @@
+# Suporte Vupth: público, pode indexar (o vupth-docs, interno, tem o seu próprio robots).
+User-agent: *
+Allow: /

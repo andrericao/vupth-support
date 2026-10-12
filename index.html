@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suporte Vupth</title>
+<meta name="description" content="Ajuda do Vupth: como entrar na fila, agendar, atrasos, multas, notificações e conta.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+  <p class="marca">VUPTH</p>
+  <h1>Como podemos ajudar?</h1>
+  <div class="busca">
+    <input id="busca" type="search" placeholder="Busque: entrar na fila, multa, senha..." autocomplete="off" aria-label="Buscar na ajuda" autofocus>
+  </div>
+</header>
+
+<main class="conteudo">
+  <section id="resultados-bloco" hidden>
+    <h2 id="resultados-titulo">Resultados</h2>
+    <ul id="resultados" class="resultados"></ul>
+  </section>
+  <section id="categorias" class="categorias" aria-label="Categorias"></section>
+  <noscript><p>Ative o JavaScript para buscar e ver os artigos.</p></noscript>
+</main>
+
+<footer class="rodape">
+  Ainda precisa de ajuda? <a id="contato" href="#">Fale com a gente</a>
+</footer>
+<script src="busca.js"></script>
+</body>
+</html>

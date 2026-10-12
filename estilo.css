@@ -1,0 +1,144 @@
+/* Suporte Vupth — o visual do app do Client, só no tema claro (site-de-suporte,
+   André 11/10). Tokens copiados de vupth/config/gluestack-ui.config.ts: cores
+   brand*, fonts (heading Archivo 700, display Archivo 800, body Inter, mono
+   DM Mono), radii (xl 12, 2xl 16, card 20, hero 24, full) e fontSizes. */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=DM+Mono:wght@500&family=Inter:wght@400;600&display=swap");
+
+:root {
+  /* cores — o par da marca é sempre lima no fundo e floresta no texto */
+  --brand-green: #9fe870;
+  --forest: #163300;
+  --forest-soft: #223d0d;
+  --green-tint: #e2f6d5;
+  --bg: #ffffff;
+  --surface: #f3f5f1;
+  --text-primary: #163300;
+  --text-secondary: #454745;
+  --text-placeholder: #6b706b;
+  --border: #d7ddd3;
+  --danger: #b3261e;
+  --danger-tint: #f7e4e2;
+
+  /* fontes */
+  --font-heading: "Archivo", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+
+  /* raios */
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-card: 20px;
+  --radius-hero: 24px;
+  --radius-full: 9999px;
+
+  /* tamanhos (fontSizes do app) */
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 20px;
+  --fs-2xl: 24px;
+  --fs-3xl: 30px;
+  --fs-4xl: 36px;
+
+  /* espaços (escala de 4 do app) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font: 400 var(--fs-md)/1.55 var(--font-body);
+}
+a { color: var(--forest); text-underline-offset: 2px; }
+b, strong { font-weight: 600; }
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--forest);
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+  margin: 0 0 var(--sp-2);
+}
+h1 { font-weight: 800; }   /* display */
+h2, h3 { font-weight: 700; } /* heading */
+
+/* Página inicial: o herói lima com a busca */
+.topo {
+  background: var(--brand-green);
+  padding: var(--sp-12) var(--sp-4) var(--sp-10);
+  text-align: center;
+  border-radius: 0 0 var(--radius-hero) var(--radius-hero);
+}
+.topo .marca {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: .18em;
+  font-size: var(--fs-sm);
+  margin: 0 0 var(--sp-3);
+}
+.topo h1 { font-size: clamp(var(--fs-3xl), 7vw, var(--fs-4xl)); }
+.busca { max-width: 640px; margin: var(--sp-5) auto 0; }
+.busca input {
+  width: 100%;
+  padding: var(--sp-4) var(--sp-5);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--forest);
+  font: 400 var(--fs-lg) var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg);
+  outline: none;
+}
+.busca input::placeholder { color: var(--text-placeholder); }
+.busca input:focus { box-shadow: 0 0 0 4px rgba(22, 51, 0, .15); }
+
+.conteudo { max-width: 860px; margin: 0 auto; padding: var(--sp-8) var(--sp-4) var(--sp-12); }
+.categorias { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-3); }
+.categoria { background: var(--surface); border-radius: var(--radius-card); padding: var(--sp-4) var(--sp-5); }
+.categoria h2 { font-size: var(--fs-lg); }
+.categoria ul { list-style: none; padding: 0; margin: 0; }
+.categoria li { margin: var(--sp-2) 0; }
+.categoria a { text-decoration: none; }
+.categoria a:hover { text-decoration: underline; }
+
+.conteudo > section > h2 { font-size: var(--fs-xl); }
+.resultados { list-style: none; padding: 0; margin: 0; }
+.resultados li { padding: var(--sp-4) 0; border-bottom: 1px solid var(--border); }
+.resultados a { font-weight: 600; font-size: var(--fs-lg); }
+.resultados p { margin: var(--sp-1) 0 0; color: var(--text-secondary); }
+.publico {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  background: var(--green-tint);
+  border-radius: var(--radius-full);
+  padding: 1px var(--sp-2);
+  margin-left: var(--sp-2);
+  vertical-align: middle;
+}
+.vazio { color: var(--text-secondary); }
+
+/* Artigo */
+.artigo { max-width: 720px; margin: 0 auto; padding: var(--sp-6) var(--sp-4) var(--sp-12); }
+.trilha { font-size: var(--fs-sm); color: var(--text-secondary); margin: 0 0 var(--sp-5); }
+.artigo h1 { font-size: clamp(var(--fs-2xl), 6vw, var(--fs-3xl)); }
+.artigo .resumo { color: var(--text-secondary); font-size: var(--fs-lg); margin-top: 0; }
+.artigo h2 { font-size: var(--fs-xl); margin-top: var(--sp-8); }
+.artigo ol, .artigo ul { padding-left: 1.3em; }
+.artigo li { margin: var(--sp-2) 0; }
+.artigo ol li::marker { font-family: var(--font-mono); color: var(--forest-soft); }
+.dica { background: var(--green-tint); border-radius: var(--radius-2xl); padding: var(--sp-3) var(--sp-4); }
+.atencao { background: var(--danger-tint); color: var(--danger); border-radius: var(--radius-2xl); padding: var(--sp-3) var(--sp-4); }
+.ajuda { margin-top: var(--sp-8); padding-top: var(--sp-4); border-top: 1px solid var(--border); color: var(--text-secondary); }
+
+.rodape { text-align: center; color: var(--text-secondary); font-size: var(--fs-sm); padding: var(--sp-6) var(--sp-4) var(--sp-10); }

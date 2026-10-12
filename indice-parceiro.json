@@ -1,0 +1,190 @@
+[
+  {
+    "arquivo": "artigos/parceiro/status-e-fila.html",
+    "titulo": "Trabalhando, Intervalo e Fora",
+    "resumo": "Como trocar o seu status e o que acontece com a fila e a loja.",
+    "palavras": [
+      "status",
+      "trabalhando",
+      "intervalo",
+      "fora",
+      "fechar fila",
+      "reabrir fila",
+      "loja aberta"
+    ],
+    "categoria": "Fila e status",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/atender-a-fila.html",
+    "titulo": "Atender os clientes da fila",
+    "resumo": "Iniciar, pausar, finalizar e remover um atendimento.",
+    "palavras": [
+      "fila",
+      "iniciar",
+      "pausar",
+      "retomar",
+      "finalizar",
+      "remover",
+      "não chegou",
+      "adiantar",
+      "promover"
+    ],
+    "categoria": "Atender",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/atrasos.html",
+    "titulo": "Cliente atrasado",
+    "resumo": "O que acontece quando o cliente não chega na vez dele.",
+    "palavras": [
+      "atraso",
+      "atrasado",
+      "não chegou",
+      "multa",
+      "fim da fila"
+    ],
+    "categoria": "Atender",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/pedidos-de-encaixe.html",
+    "titulo": "Pedidos de encaixe",
+    "resumo": "Aceitar ou recusar quem pede um horário fora da fila.",
+    "palavras": [
+      "encaixe",
+      "pedido",
+      "solicitação",
+      "aceitar",
+      "recusar",
+      "vale até",
+      "prazo"
+    ],
+    "categoria": "Encaixes",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/adicionar-cliente.html",
+    "titulo": "Adicionar um cliente sem o app",
+    "resumo": "Pôr na fila quem chegou na loja e não usa o app.",
+    "palavras": [
+      "adicionar cliente",
+      "sem app",
+      "balcão",
+      "encaixar"
+    ],
+    "categoria": "Atender",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/meus-servicos.html",
+    "titulo": "Meus serviços e preços",
+    "resumo": "Cadastrar o que você oferece, o tempo e o preço.",
+    "palavras": [
+      "serviço",
+      "preço",
+      "tempo",
+      "duração",
+      "taxa",
+      "editar serviço"
+    ],
+    "categoria": "Seu perfil",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/refeicoes.html",
+    "titulo": "Refeições",
+    "resumo": "Avisar a fila do seu horário de almoço ou janta.",
+    "palavras": [
+      "refeição",
+      "almoço",
+      "janta",
+      "intervalo",
+      "aviso"
+    ],
+    "categoria": "Seu perfil",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/relatorios-e-expediente.html",
+    "titulo": "Seu dia, relatórios e expediente",
+    "resumo": "Quanto você recebeu, quantos atendimentos e o seu horário de trabalho.",
+    "palavras": [
+      "relatório",
+      "seu dia",
+      "recebi",
+      "expediente",
+      "histórico",
+      "semana",
+      "mês"
+    ],
+    "categoria": "Relatórios",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/vinculo.html",
+    "titulo": "Vínculo com a loja",
+    "resumo": "Pedir para trabalhar numa loja, trocar ou sair.",
+    "palavras": [
+      "vínculo",
+      "loja",
+      "desafiliar",
+      "buscar estabelecimento",
+      "solicitar vinculação",
+      "convite"
+    ],
+    "categoria": "Seu perfil",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/dono-loja-e-horario.html",
+    "titulo": "Dono: cadastrar a loja e o horário",
+    "resumo": "Criar a loja e definir o horário de funcionamento.",
+    "palavras": [
+      "dono",
+      "loja",
+      "estabelecimento",
+      "horário",
+      "funcionamento",
+      "24 horas",
+      "foto da loja",
+      "endereço"
+    ],
+    "categoria": "Dono da loja",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/dono-profissionais.html",
+    "titulo": "Dono: profissionais, filas e relatórios",
+    "resumo": "Aceitar profissionais e acompanhar a loja.",
+    "palavras": [
+      "dono",
+      "profissional",
+      "solicitações",
+      "filas",
+      "atendimentos",
+      "relatórios",
+      "retirados"
+    ],
+    "categoria": "Dono da loja",
+    "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/conta.html",
+    "titulo": "Entrar, senha e conta",
+    "resumo": "Problemas para entrar e como desativar ou excluir a conta.",
+    "palavras": [
+      "entrar",
+      "login",
+      "senha",
+      "senha incorreta",
+      "sem conta",
+      "desativar",
+      "excluir conta",
+      "aparência",
+      "fonte"
+    ],
+    "categoria": "Conta",
+    "publico": "parceiro"
+  }
+]
