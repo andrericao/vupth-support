@@ -84,6 +84,43 @@
     });
   }
 
+  // "Você quis dizer…": vocabulário dos índices + distância de edição (SUP-3).
+  function distancia(a, b) {
+    if (Math.abs(a.length - b.length) > 2) return 99;
+    var prev = [], i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      var cur = [i];
+      for (j = 1; j <= b.length; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      }
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+
+  function sugestao(termos) {
+    var vocab = {};
+    artigos.forEach(function (a) {
+      (a._titulo + " " + a._palavras + " " + a._resumo).split(/[^a-z0-9]+/).forEach(function (w) {
+        if (w.length > 2) vocab[w] = true;
+      });
+    });
+    var palavras = Object.keys(vocab);
+    var mudou = false;
+    var novos = termos.map(function (t) {
+      if (vocab[t]) return t;
+      var limite = t.length > 5 ? 2 : 1, melhor = t, dm = limite + 1;
+      palavras.forEach(function (w) {
+        var d = distancia(t, w);
+        if (d < dm) { dm = d; melhor = w; }
+      });
+      if (melhor !== t) mudou = true;
+      return melhor;
+    });
+    return mudou ? novos.join(" ") : null;
+  }
+
   function busca(consulta) {
     var bloco = document.getElementById("resultados-bloco");
     var lista = document.getElementById("resultados");
@@ -104,7 +141,19 @@
     document.getElementById("resultados-titulo").textContent =
       achados.length ? "Resultados para “" + consulta.trim() + "”" : "Nada encontrado";
     if (!achados.length) {
-      lista.appendChild(el("li", { class: "vazio", texto: "Tente outras palavras, como “fila”, “agendar” ou “senha”." }));
+      var sug = sugestao(termos);
+      if (sug) {
+        var link = el("a", { href: "#", texto: sug });
+        link.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          var campo = document.getElementById("busca");
+          campo.value = sug;
+          busca(sug);
+        });
+        lista.appendChild(el("li", { class: "vazio" }, [document.createTextNode("Você quis dizer "), link, document.createTextNode("?")]));
+      } else {
+        lista.appendChild(el("li", { class: "vazio", texto: "Tente outras palavras, como “fila”, “agendar” ou “senha”." }));
+      }
     }
     achados.forEach(function (x) {
       lista.appendChild(el("li", {}, [
