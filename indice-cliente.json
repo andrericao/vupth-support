@@ -150,13 +150,15 @@
   {
     "arquivo": "artigos/cliente/multas.html",
     "titulo": "Multas: quando e como são cobradas",
-    "resumo": "As duas situações com multa e onde o valor aparece.",
+    "resumo": "As duas situações com multa, os valores (R$ 3,00 e R$ 5,00) e onde a multa pendente aparece.",
     "palavras": [
       "multa",
       "cobrança",
       "valor",
       "pagar",
-      "próximo atendimento"
+      "próximo atendimento",
+      "multa pendente",
+      "pix"
     ],
     "categoria": "Atrasos e multas",
     "publico": "cliente"
