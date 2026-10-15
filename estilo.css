@@ -142,3 +142,16 @@ h2, h3 { font-weight: 700; } /* heading */
 .ajuda { margin-top: var(--sp-8); padding-top: var(--sp-4); border-top: 1px solid var(--border); color: var(--text-secondary); }
 
 .rodape { text-align: center; color: var(--text-secondary); font-size: var(--fs-sm); padding: var(--sp-6) var(--sp-4) var(--sp-10); }
+
+/* Índice lateral e "Antes disso" (SUP-2, SUP-4) */
+.antes { background: var(--surface); border-radius: var(--radius-2xl); padding: var(--sp-3) var(--sp-4); margin: var(--sp-4) 0; }
+.indice { position: fixed; top: var(--sp-4); right: var(--sp-4); width: 240px; max-height: 80vh; overflow: auto;
+  background: var(--surface); border-radius: var(--radius-2xl); padding: var(--sp-3); font-size: var(--fs-sm); z-index: 10; }
+.indice-botao { background: none; border: 0; font: inherit; font-weight: 600; color: var(--forest); cursor: pointer; padding: var(--sp-1); }
+.indice ul { list-style: none; margin: var(--sp-2) 0 0; padding: 0; }
+.indice li { margin: var(--sp-1) 0; border-left: 3px solid transparent; padding-left: var(--sp-2); }
+.indice li.sub { margin-left: var(--sp-3); }
+.indice li.atual { border-left-color: var(--brand-green); font-weight: 600; }
+.indice a { text-decoration: none; }
+.indice.fechado ul { display: none; }
+@media (max-width: 1099px) { .indice { top: auto; bottom: var(--sp-3); right: var(--sp-3); width: auto; max-width: 80vw; } }
