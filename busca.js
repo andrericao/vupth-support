@@ -6,8 +6,8 @@
 
   var INDICES = ["indice-cliente.json", "indice-parceiro.json"];
 
-  // O e-mail do "Ainda precisa de ajuda?": o mesmo das páginas legais (André, 11/10).
-  var CONTATO_EMAIL = "andrericao49@gmail.com";
+  // Sem e-mail pessoal no site (DEC-38): o contato virá por formulário (contato-por-formulario).
+  var CONTATO_EMAIL = "";
 
   // A ordem das categorias na página inicial. Artigo sem categoria (o índice
   // do Partner) cai em "Para profissionais e donos".
