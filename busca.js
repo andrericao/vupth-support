@@ -6,8 +6,6 @@
 
   var INDICES = ["indice-cliente.json", "indice-parceiro.json"];
 
-  // Sem e-mail pessoal no site (DEC-38): o contato virá por formulário (contato-por-formulario).
-  var CONTATO_EMAIL = "";
 
   // A ordem das categorias na página inicial. Artigo sem categoria (o índice
   // do Partner) cai em "Para profissionais e donos".
@@ -119,13 +117,6 @@
     categorias.hidden = true;
   }
 
-  function ligaContato() {
-    var link = document.getElementById("contato");
-    if (!link) return;
-    if (CONTATO_EMAIL) link.href = "mailto:" + CONTATO_EMAIL;
-    else link.replaceWith(document.createTextNode("o contato por e-mail chega em breve."));
-  }
-
   function carrega() {
     return Promise.all(INDICES.map(function (url) {
       return fetch(url).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; });
@@ -135,7 +126,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    ligaContato();
     var campo = document.getElementById("busca");
     carrega().then(function () {
       mostraCategorias();
