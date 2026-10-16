@@ -164,3 +164,31 @@ h2, h3 { font-weight: 700; } /* heading */
 .abas { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin: 0 0 var(--sp-5); }
 .abas a { padding: var(--sp-2) var(--sp-4); border-radius: 999px; border: 2px solid var(--border); text-decoration: none; font-size: var(--fs-sm); }
 .abas a[aria-current="page"] { background: var(--green-tint); border-color: var(--forest); font-weight: 600; }
+
+/* Navegação como a documentação do Expo (indice-como-expo) */
+.arvore { position: fixed; top: var(--sp-4); left: var(--sp-4); width: 250px; max-height: 88vh; overflow: auto;
+  background: var(--surface); border-radius: var(--radius-2xl); padding: var(--sp-3); font-size: var(--fs-sm); z-index: 10; }
+.arvore-botao { background: none; border: 0; font: inherit; font-weight: 600; color: var(--forest); cursor: pointer; padding: var(--sp-1); }
+.arvore.fechado .arvore-corpo { display: none; }
+.arvore .atalhos { margin: var(--sp-2) 0; color: var(--text-secondary); }
+.arvore details { margin: var(--sp-1) 0; }
+.arvore summary { cursor: pointer; font-weight: 600; padding: var(--sp-1) 0; }
+.arvore ul { list-style: none; margin: 0; padding: 0 0 0 var(--sp-3); }
+.arvore li { margin: var(--sp-1) 0; padding-left: var(--sp-3); position: relative; }
+.arvore li.aqui::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; background: var(--forest); }
+.arvore li.aqui a { font-weight: 600; }
+.arvore a { text-decoration: none; }
+@media (max-width: 1279px) { .arvore { top: auto; bottom: var(--sp-3); left: var(--sp-3); max-width: 75vw; } }
+
+.cartoes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); margin-top: var(--sp-8); }
+.cartao { display: flex; flex-direction: column; gap: 2px; border: 2px solid var(--border); border-radius: var(--radius-card); padding: var(--sp-3) var(--sp-4); text-decoration: none; color: inherit; }
+.cartao:hover { border-color: var(--forest); }
+.cartao small, .cartao span { color: var(--text-secondary); font-size: var(--fs-sm); }
+.cartao.prox { grid-column: 2; text-align: right; }
+.cartao.ant { grid-column: 1; }
+@media (max-width: 560px) { .cartoes { grid-template-columns: 1fr; } .cartao.prox { grid-column: 1; } }
+
+.util { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-6); margin-top: var(--sp-6); padding-top: var(--sp-4); border-top: 1px solid var(--border); color: var(--text-secondary); font-size: var(--fs-sm); }
+.util p { margin: 0; }
+.util button { background: none; border: 2px solid var(--border); border-radius: var(--radius-full); margin-left: var(--sp-2); padding: 2px var(--sp-3); cursor: pointer; font-size: var(--fs-md); }
+.util button:hover { border-color: var(--forest); }
