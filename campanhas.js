@@ -1,4 +1,4 @@
-// "Campanhas ativas" (SUP-10): lê GET /campaigns/active (público) e mostra por perfil.
+// "Cupons e promoções" (SUP-10): lê GET /campaigns/active (público) e mostra por perfil.
 // Campos conforme o Backend (backend.html, Solicitadas 15/10 16h15, 4a94610 + 2dd32f9).
 // Desligada até a branch `campanhas` do Backend subir.
 (function () {
@@ -64,10 +64,10 @@
   });
 
   if (!ATIVO) {
-    aviso.textContent = "As campanhas ainda não estão disponíveis aqui. Volte em breve.";
+    aviso.textContent = "Os cupons e promoções ainda não estão disponíveis aqui. Volte em breve.";
     return;
   }
   fetch(ENDPOINT).then(function (r) { return r.ok ? r.json() : Promise.reject(); })
     .then(function (d) { todas = Array.isArray(d) ? d : []; mostra("cliente"); })
-    .catch(function () { aviso.textContent = "Não foi possível carregar as campanhas agora."; });
+    .catch(function () { aviso.textContent = "Não foi possível carregar os cupons e promoções agora."; });
 })();
