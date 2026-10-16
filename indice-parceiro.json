@@ -185,7 +185,11 @@
       "fonte"
     ],
     "categoria": "Conta",
-    "publico": "parceiro"
+    "publico": "parceiro",
+    "perfis": [
+      "profissional",
+      "dono"
+    ]
   },
   {
     "arquivo": "artigos/parceiro/chave-pix.html",
@@ -204,6 +208,10 @@
       "titular"
     ],
     "categoria": "Seu perfil",
-    "publico": "parceiro"
+    "publico": "parceiro",
+    "perfis": [
+      "profissional",
+      "dono"
+    ]
   }
 ]

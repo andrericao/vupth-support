@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suporte Vupth</title>
 <meta name="description" content="Ajuda do Vupth: como entrar na fila, agendar, atrasos, multas, notificações e conta.">
-<link rel="stylesheet" href="estilo.css">
+<link rel="stylesheet" href="/estilo.css">
 </head>
 <body>
 <header class="topo">
   <p class="marca">VUPTH</p>
-  <h1>Como podemos ajudar?</h1>
+  <p id="trilha" class="trilha" hidden></p>
+  <h1 id="titulo">Como podemos ajudar?</h1>
   <div class="busca">
     <input id="busca" type="search" placeholder="Busque: entrar na fila, multa, senha..." autocomplete="off" aria-label="Buscar na ajuda" autofocus>
   </div>
@@ -21,15 +22,15 @@
     <h2 id="resultados-titulo">Resultados</h2>
     <ul id="resultados" class="resultados"></ul>
   </section>
-  <section id="categorias" class="categorias" aria-label="Categorias"></section>
+  <section id="categorias" class="categorias" aria-label="Perfis e categorias"></section>
   <noscript><p>Ative o JavaScript para buscar e ver os artigos.</p></noscript>
 </main>
 
 <footer class="rodape">
   <p>Baixar o app (Android): <a href="https://vupth.pages.dev/baixar">para clientes</a> · <a href="https://vupth-partner.pages.dev/baixar">para profissionais e donos</a>.
   <small>Os links funcionam depois que o app for publicado; até lá a página pode estar fora do ar.</small></p>
-  Ainda precisa de ajuda? <a id="contato" href="contato.html">Fale com a gente</a> · <a href="campanhas.html">Cupons e promoções</a>
+  Ainda precisa de ajuda? <a id="contato" href="/contato.html">Fale com a gente</a> · <a href="/campanhas.html">Cupons e promoções</a>
 </footer>
-<script src="busca.js"></script>
+<script src="/busca.js"></script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+# Home por perfil (SUP-12): /cliente, /profissional, /dono e /<perfil>/<categoria>
+# abrem a home; o busca.js lê o caminho. URLs estáveis para os apps linkarem.
+/cliente        /  200
+/cliente/*      /  200
+/profissional   /  200
+/profissional/* /  200
+/dono           /  200
+/dono/*         /  200

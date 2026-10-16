@@ -4,22 +4,30 @@
 (function () {
   "use strict";
 
-  var INDICES = ["indice-cliente.json", "indice-parceiro.json"];
+  var INDICES = ["/indice-cliente.json", "/indice-parceiro.json"];
 
-
-  // A ordem das categorias na página inicial. Artigo sem categoria (o índice
-  // do Partner) cai em "Para profissionais e donos".
-  var CATEGORIAS = [
-    "Primeiros passos",
-    "Entrar na fila",
-    "Agendar",
-    "Atrasos e multas",
-    "Notificações",
-    "Conta e senha",
-    "Problemas comuns",
-    "Para profissionais e donos",
+  // home-por-perfil + separacao-melhor (SUP-12, SUP-4): primeiro o perfil,
+  // depois a categoria. Cada um tem URL própria (/cliente/passo-a-passo), para
+  // os apps linkarem direto; o _redirects reescreve tudo para esta página.
+  var PERFIS = [
+    { id: "cliente", nome: "Cliente", resumo: "Entrar na fila, agendar, atrasos e a sua conta." },
+    { id: "profissional", nome: "Profissional", resumo: "Atender a fila, status, encaixes e o seu perfil." },
+    { id: "dono", nome: "Dono", resumo: "A loja, o horário, os profissionais e os relatórios." },
   ];
-  var CATEGORIA_DO_PARCEIRO = "Para profissionais e donos";
+  var TIPOS = [
+    { id: "passo-a-passo", nome: "Passo a passo" },
+    { id: "regulamentos", nome: "Regulamentos" },
+    { id: "ajuda", nome: "Ajuda" },
+  ];
+  // Categoria do índice que não é passo a passo.
+  var TIPO_DA_CATEGORIA = { "Atrasos e multas": "regulamentos", "Problemas comuns": "ajuda", "Notificações": "ajuda" };
+  var REGULAMENTO_DO_PARCEIRO = { "artigos/parceiro/atrasos.html": true };
+
+  // A ordem das categorias dentro de cada perfil.
+  var CATEGORIAS = [
+    "Primeiros passos", "Entrar na fila", "Agendar", "Atrasos e multas", "Notificações", "Conta e senha",
+    "Problemas comuns", "Fila e status", "Atender", "Encaixes", "Seu perfil", "Relatórios", "Dono da loja", "Conta",
+  ];
 
   var artigos = [];
 
@@ -31,10 +39,36 @@
   }
 
   function categoriaDe(a) {
-    return a.categoria || (a.publico === "parceiro" ? CATEGORIA_DO_PARCEIRO : "Problemas comuns");
+    return a.categoria || "Problemas comuns";
+  }
+
+  // O índice do Partner serve o profissional e o dono; "perfis" no JSON manda.
+  function perfisDe(a) {
+    if (a.perfis) return a.perfis;
+    if (a.publico !== "parceiro") return ["cliente"];
+    return a.categoria === "Dono da loja" ? ["dono"] : ["profissional"];
+  }
+
+  function tipoDe(a) {
+    if (a.tipo) return a.tipo;
+    if (REGULAMENTO_DO_PARCEIRO[a.arquivo]) return "regulamentos";
+    return TIPO_DA_CATEGORIA[categoriaDe(a)] || "passo-a-passo";
+  }
+
+  // /cliente/regulamentos, ou ?perfil=cliente&tipo=regulamentos (python3 -m http.server).
+  function rota() {
+    var partes = location.pathname.split("/").filter(Boolean);
+    var q = new URLSearchParams(location.search);
+    var perfil = q.get("perfil") || partes[0];
+    var tipo = q.get("tipo") || partes[1];
+    perfil = PERFIS.filter(function (x) { return x.id === perfil; })[0] || null;
+    tipo = perfil && TIPOS.filter(function (x) { return x.id === tipo; })[0] || null;
+    return { perfil: perfil, tipo: tipo };
   }
 
   function prepara(a) {
+    a._perfis = perfisDe(a);
+    a._tipo = tipoDe(a);
     a._titulo = normalizar(a.titulo);
     a._palavras = normalizar((a.palavras || []).join(" "));
     a._resumo = normalizar(a.resumo);
@@ -68,17 +102,53 @@
   }
 
   function rotuloDoPublico(a) {
-    return el("span", { class: "publico", texto: a.publico === "parceiro" ? "Parceiro" : "Cliente" });
+    var nomes = a._perfis.map(function (id) { return PERFIS.filter(function (x) { return x.id === id; })[0].nome; });
+    return el("span", { class: "publico", texto: nomes.join(" e ") });
+  }
+
+  function href(perfil, tipo) {
+    return "/" + perfil.id + "/" + (tipo ? tipo.id : "");
+  }
+
+  function mostraPerfis(caixa) {
+    PERFIS.forEach(function (p) {
+      caixa.appendChild(el("a", { class: "categoria perfil", href: href(p) }, [
+        el("h2", { texto: p.nome }), el("p", { texto: p.resumo }),
+      ]));
+    });
   }
 
   function mostraCategorias() {
     var caixa = document.getElementById("categorias");
+    var r = rota();
     caixa.textContent = "";
+    if (!r.perfil) { mostraPerfis(caixa); return; }
+
+    // Trilha e as abas do perfil: Todos, Passo a passo, Regulamentos, Ajuda, Promoções.
+    var trilha = document.getElementById("trilha");
+    trilha.textContent = "";
+    trilha.appendChild(el("a", { href: "/", texto: "Suporte" }));
+    trilha.appendChild(document.createTextNode(" · " + r.perfil.nome + (r.tipo ? " · " + r.tipo.nome : "")));
+    trilha.hidden = false;
+    document.getElementById("titulo").textContent = r.perfil.nome + (r.tipo ? ": " + r.tipo.nome.toLowerCase() : "");
+    document.title = (r.tipo ? r.tipo.nome + " · " : "") + r.perfil.nome + " · Suporte Vupth";
+
+    var doPerfil = artigos.filter(function (a) { return a._perfis.indexOf(r.perfil.id) >= 0; });
+    var abas = el("nav", { class: "abas", "aria-label": "Categorias" });
+    [{ id: null, nome: "Todos" }].concat(TIPOS).forEach(function (t) {
+      if (t.id && !doPerfil.some(function (a) { return a._tipo === t.id; })) return;
+      var ativo = (r.tipo ? r.tipo.id : null) === t.id;
+      abas.appendChild(el("a", { href: href(r.perfil, t.id && t), "aria-current": ativo ? "page" : "false", texto: t.nome }));
+    });
+    abas.appendChild(el("a", { href: "/campanhas.html", texto: "Cupons e promoções" }));
+    caixa.parentNode.insertBefore(abas, caixa);
+
+    var mostrar = doPerfil.filter(function (a) { return !r.tipo || a._tipo === r.tipo.id; });
     CATEGORIAS.forEach(function (nome) {
-      var daCategoria = artigos.filter(function (a) { return categoriaDe(a) === nome; });
+      var daCategoria = mostrar.filter(function (a) { return categoriaDe(a) === nome; });
       if (!daCategoria.length) return;
       var lista = el("ul", {}, daCategoria.map(function (a) {
-        return el("li", {}, [el("a", { href: a.arquivo, texto: a.titulo })]);
+        return el("li", {}, [el("a", { href: "/" + a.arquivo, texto: a.titulo })]);
       }));
       caixa.appendChild(el("div", { class: "categoria" }, [el("h2", { texto: nome }), lista]));
     });
@@ -132,7 +202,9 @@
       categorias.hidden = false;
       return;
     }
+    var r = rota();
     var achados = artigos
+      .filter(function (a) { return !r.perfil || a._perfis.indexOf(r.perfil.id) >= 0; })
       .map(function (a) { return { a: a, p: pontua(a, termos) }; })
       .filter(function (x) { return x.p > 0; })
       .sort(function (x, y) { return y.p - x.p; });
@@ -157,7 +229,7 @@
     }
     achados.forEach(function (x) {
       lista.appendChild(el("li", {}, [
-        el("a", { href: x.a.arquivo, texto: x.a.titulo }),
+        el("a", { href: "/" + x.a.arquivo, texto: x.a.titulo }),
         rotuloDoPublico(x.a),
         el("p", { texto: x.a.resumo }),
       ]));
