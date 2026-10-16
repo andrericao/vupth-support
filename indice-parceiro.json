@@ -186,5 +186,24 @@
     ],
     "categoria": "Conta",
     "publico": "parceiro"
+  },
+  {
+    "arquivo": "artigos/parceiro/chave-pix.html",
+    "titulo": "Sua chave Pix",
+    "resumo": "A chave é sua: o cliente copia e paga direto a você.",
+    "palavras": [
+      "pix",
+      "chave pix",
+      "pagamento",
+      "receber",
+      "chave aleatória",
+      "cpf",
+      "cnpj",
+      "pagamento pendente",
+      "sim, recebi",
+      "titular"
+    ],
+    "categoria": "Seu perfil",
+    "publico": "parceiro"
   }
 ]
