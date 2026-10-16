@@ -277,5 +277,23 @@
     ],
     "categoria": "Primeiros passos",
     "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/como-a-fila-funciona.html",
+    "titulo": "Como a fila funciona",
+    "resumo": "As regras da fila e o motivo de cada uma: entrar, sair, trocar de lugar e atrasar.",
+    "palavras": [
+      "regras",
+      "regulamento",
+      "fila",
+      "ordem",
+      "trocar",
+      "sair",
+      "atraso",
+      "motivo",
+      "por que"
+    ],
+    "categoria": "Atrasos e multas",
+    "publico": "cliente"
   }
 ]
