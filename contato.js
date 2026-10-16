@@ -17,7 +17,7 @@
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
     var d = {};
-    ["nome", "email", "perfil", "assunto", "mensagem"].forEach(function (k) { d[k] = form.elements[k].value.trim(); });
+    ["nome", "email", "perfil", "categoria", "assunto", "mensagem"].forEach(function (k) { d[k] = form.elements[k].value.trim(); });
     if (!d.nome || !d.email || !d.assunto || !d.mensagem) { aviso.textContent = "Preencha todos os campos."; return; }
     var botao = document.getElementById("enviar");
     botao.disabled = true;
