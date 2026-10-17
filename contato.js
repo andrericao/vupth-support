@@ -8,6 +8,23 @@
   var form = document.getElementById("form");
   var aviso = document.getElementById("aviso");
 
+  // Link dos apps: contato.html?perfil=cliente&categoria=feedback já escolhe perfil e categoria.
+  (function () {
+    var q = new URLSearchParams(window.location.search);
+    var perfil = (q.get("perfil") || "").toLowerCase();
+    var categoria = (q.get("categoria") || "").toUpperCase();
+    function escolhe(campo, valor) {
+      for (var i = 0; i < campo.options.length; i++) {
+        if (campo.options[i].value === valor) { campo.value = valor; return true; }
+      }
+      return false;
+    }
+    if (perfil) escolhe(form.elements.perfil, perfil);
+    if (categoria && escolhe(form.elements.categoria, categoria) && categoria === "FEEDBACK" && !form.elements.assunto.value) {
+      form.elements.assunto.value = "Feedback sobre o app";
+    }
+  })();
+
   if (!ATIVO) {
     aviso.textContent = "O envio de mensagens ainda não está disponível. Enquanto isso, busque o seu assunto na ajuda.";
     Array.prototype.forEach.call(form.elements, function (e) { e.disabled = true; });
