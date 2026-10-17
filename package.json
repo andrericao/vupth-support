@@ -1,0 +1,20 @@
+{
+  "name": "vupth-support",
+  "private": true,
+  "description": "Site de suporte do Vupth (estático)",
+  "scripts": {
+    "conferir": "python3 tools/conferir.py",
+    "lint": "eslint . --max-warnings 0 && html-validate \"*.html\" \"artigos/**/*.html\"",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "prepare": "git config core.hooksPath .githooks || true"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "html-validate": "^11.16.3",
+    "jest": "^30.5.2",
+    "jest-environment-jsdom": "^30.5.2"
+  }
+}

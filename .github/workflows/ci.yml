@@ -13,10 +13,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  conferir:
+  conferir-lint-e-testes:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
       - name: Links, índices e ids
         run: python3 tools/conferir.py
+
+      - name: Lint (eslint e html-validate)
+        run: npm run lint
+
+      - name: Testes com cobertura (piso 80%)
+        run: npx jest --ci --coverage

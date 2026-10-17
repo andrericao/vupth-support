@@ -1,4 +1,6 @@
 #!/bin/sh
-# Pre-push do Suporte: confere links, índices e ids antes de subir.
+# Pre-push do Suporte: links e índices, lint (JS e HTML) e testes com cobertura (piso 80%).
 cd "$(git rev-parse --show-toplevel)" || exit 1
-python3 tools/conferir.py || { echo "pre-push: corrija os erros acima antes do push."; exit 1; }
+command -v npm >/dev/null 2>&1 || { export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" >/dev/null 2>&1; }
+command -v npm >/dev/null 2>&1 || { echo "pre-push: npm não encontrado."; exit 1; }
+python3 tools/conferir.py && npm run lint --silent && npx jest --coverage --silent || { echo "pre-push: corrija os erros acima antes do push."; exit 1; }

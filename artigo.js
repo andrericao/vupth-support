@@ -134,7 +134,7 @@
       var rod = document.createElement("div");
       rod.className = "util";
       var chave = "ajudou:" + publico + "/" + atualNome, resp = null;
-      try { resp = localStorage.getItem(chave); } catch (e) {}
+      try { resp = localStorage.getItem(chave); } catch { /* sem armazenamento ou rede: segue sem */ }
       var perg = document.createElement("p");
       perg.textContent = "Este artigo ajudou? ";
       function agradece() { perg.textContent = "Obrigado pelo retorno."; }
@@ -144,14 +144,14 @@
         b.textContent = em;
         b.setAttribute("aria-label", i ? "Não ajudou" : "Ajudou");
         b.addEventListener("click", function () {
-          try { localStorage.setItem(chave, i ? "nao" : "sim"); } catch (e) {}
+          try { localStorage.setItem(chave, i ? "nao" : "sim"); } catch { /* sem armazenamento ou rede: segue sem */ }
           // Voto no Backend (BAK voto-do-artigo); se falhar, o voto local basta.
           try {
             fetch(VOTO + encodeURIComponent((publico + "-" + atualNome).slice(0, 80)) + "/vote", {
               method: "POST", headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ vote: i ? "DOWN" : "UP" })
             }).catch(function () {});
-          } catch (e) {}
+          } catch { /* sem armazenamento ou rede: segue sem */ }
           agradece();
         });
         perg.appendChild(b);
@@ -234,14 +234,14 @@
 function lateral(painel, botao, rotulo, setaFechar, setaAbrir, lado, largura) {
   "use strict";
   var chave = "vupth-suporte-lado-" + lado, guardado = null;
-  try { guardado = localStorage.getItem(chave); } catch (e) {}
+  try { guardado = localStorage.getItem(chave); } catch { /* sem armazenamento ou rede: segue sem */ }
   function aplica(sim, grava) {
     painel.classList.toggle("fechado", !sim);
     botao.textContent = sim ? setaFechar : setaAbrir;
     botao.setAttribute("aria-expanded", sim ? "true" : "false");
     botao.setAttribute("aria-label", (sim ? "Recolher " : "Expandir ") + rotulo);
     botao.title = (sim ? "Recolher " : "Expandir ") + rotulo;
-    if (grava) { try { localStorage.setItem(chave, sim ? "0" : "1"); } catch (e) {} }
+    if (grava) { try { localStorage.setItem(chave, sim ? "0" : "1"); } catch { /* sem armazenamento ou rede: segue sem */ } }
   }
   aplica(guardado === null ? window.innerWidth >= largura : guardado === "0", false);
   botao.addEventListener("click", function () { aplica(painel.classList.contains("fechado"), true); });
