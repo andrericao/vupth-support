@@ -295,5 +295,24 @@
     ],
     "categoria": "Atrasos e multas",
     "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/como-o-valor-e-calculado.html",
+    "titulo": "Como o valor é calculado",
+    "resumo": "Multas, taxas e arredondamento: de onde vem cada parte do que você paga.",
+    "palavras": [
+      "valor",
+      "preço",
+      "multa",
+      "taxa",
+      "arredondamento",
+      "gateway",
+      "bonificação",
+      "regras",
+      "total",
+      "90"
+    ],
+    "categoria": "Atrasos e multas",
+    "publico": "cliente"
   }
 ]
