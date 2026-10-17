@@ -63,6 +63,7 @@
   // à esquerda, cartões Anterior/Próximo e rodapé "Este artigo ajudou?".
   if (m) {
     var publico = m[1], atualNome = m[2];
+    var VOTO = "https://vupth-backend-ia.onrender.com/support/articles/";
     fetch("/indice-" + publico + ".json").then(function (r) { return r.json(); }).then(function (lista) {
       var grupos = [], porNome = {};
       lista.forEach(function (x) {
@@ -150,6 +151,13 @@
         b.setAttribute("aria-label", i ? "Não ajudou" : "Ajudou");
         b.addEventListener("click", function () {
           try { localStorage.setItem(chave, i ? "nao" : "sim"); } catch (e) {}
+          // Voto no Backend (BAK voto-do-artigo); se falhar, o voto local basta.
+          try {
+            fetch(VOTO + encodeURIComponent((publico + "-" + atualNome).slice(0, 80)) + "/vote", {
+              method: "POST", headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ vote: i ? "DOWN" : "UP" })
+            }).catch(function () {});
+          } catch (e) {}
           agradece();
         });
         perg.appendChild(b);
