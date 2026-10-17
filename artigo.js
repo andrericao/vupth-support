@@ -112,13 +112,7 @@
       });
       lado.appendChild(corpo);
       document.body.appendChild(lado);
-      function abreLado(sim) {
-        lado.classList.toggle("fechado", !sim);
-        btn.textContent = sim ? "Assuntos ▾" : "Assuntos ▸";
-        btn.setAttribute("aria-expanded", sim ? "true" : "false");
-      }
-      abreLado(window.innerWidth >= 1280);
-      btn.addEventListener("click", function () { abreLado(lado.classList.contains("fechado")); });
+      lateral(lado, btn, "Assuntos", "«", "»", "esq", 1280);
 
       // Anterior / Próximo
       var cartoes = document.createElement("div");
@@ -220,13 +214,7 @@
   nav.appendChild(ul);
   document.body.appendChild(nav);
 
-  function aberto(sim) {
-    nav.classList.toggle("fechado", !sim);
-    botao.textContent = sim ? "Nesta página ▾" : "Nesta página ▸";
-    botao.setAttribute("aria-expanded", sim ? "true" : "false");
-  }
-  aberto(window.innerWidth >= 1100); // no celular, recolhido
-  botao.addEventListener("click", function () { aberto(nav.classList.contains("fechado")); });
+  lateral(nav, botao, "Nesta página", "»", "«", "dir", 1100);
 
   if ("IntersectionObserver" in window) {
     var visiveis = {};
@@ -240,3 +228,22 @@
     itens.forEach(function (i) { obs.observe(i.el); });
   }
 })();
+
+// Lateral recolhível (indices-recolhiveis): botão com ícone, estado guardado no navegador;
+// recolhida, vira uma faixa fina só com o botão. Sem estado guardado, recolhida no celular.
+function lateral(painel, botao, rotulo, setaFechar, setaAbrir, lado, largura) {
+  "use strict";
+  var chave = "vupth-suporte-lado-" + lado, guardado = null;
+  try { guardado = localStorage.getItem(chave); } catch (e) {}
+  function aplica(sim, grava) {
+    painel.classList.toggle("fechado", !sim);
+    botao.textContent = sim ? setaFechar : setaAbrir;
+    botao.setAttribute("aria-expanded", sim ? "true" : "false");
+    botao.setAttribute("aria-label", (sim ? "Recolher " : "Expandir ") + rotulo);
+    botao.title = (sim ? "Recolher " : "Expandir ") + rotulo;
+    if (grava) { try { localStorage.setItem(chave, sim ? "0" : "1"); } catch (e) {} }
+  }
+  aplica(guardado === null ? window.innerWidth >= largura : guardado === "0", false);
+  botao.addEventListener("click", function () { aplica(painel.classList.contains("fechado"), true); });
+  return aplica;
+}

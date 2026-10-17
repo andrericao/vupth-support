@@ -147,13 +147,20 @@ h2, h3 { font-weight: 700; } /* heading */
 .antes { background: var(--surface); border-radius: var(--radius-2xl); padding: var(--sp-3) var(--sp-4); margin: var(--sp-4) 0; }
 .indice { position: fixed; top: var(--sp-4); right: var(--sp-4); width: 240px; max-height: 80vh; overflow: auto;
   background: var(--surface); border-radius: var(--radius-2xl); padding: var(--sp-3); font-size: var(--fs-sm); z-index: 10; }
-.indice-botao { background: none; border: 0; font: inherit; font-weight: 600; color: var(--forest); cursor: pointer; padding: var(--sp-1); }
+.indice-botao, .arvore-botao { background: none; border: 0; font: inherit; font-weight: 700; font-size: var(--fs-lg, 1.25rem); line-height: 1; color: var(--forest); cursor: pointer; padding: var(--sp-1) var(--sp-2); }
 .indice ul { list-style: none; margin: var(--sp-2) 0 0; padding: 0; }
 .indice li { margin: var(--sp-1) 0; border-left: 3px solid transparent; padding-left: var(--sp-2); }
 .indice li.sub { margin-left: var(--sp-3); }
 .indice li.atual { border-left-color: var(--brand-green); font-weight: 600; }
 .indice a { text-decoration: none; }
 .indice.fechado ul { display: none; }
+/* Laterais até a base da tela; recolhidas, faixa fina só com o botão */
+@media (min-width: 1100px) {
+  .indice { top: 0; bottom: 0; right: 0; max-height: none; border-radius: 0; border-left: 1px solid var(--border); }
+  .indice.fechado { width: 44px; padding: var(--sp-2) 0; text-align: center; }
+  .indice-botao { float: right; }
+  .indice.fechado .indice-botao { float: none; }
+}
 @media (max-width: 1099px) { .indice { top: auto; bottom: var(--sp-3); right: var(--sp-3); width: auto; max-width: 80vw; } }
 
 /* Home por perfil e abas de categoria (SUP-12, SUP-4) */
@@ -168,8 +175,13 @@ h2, h3 { font-weight: 700; } /* heading */
 /* Navegação como a documentação do Expo (indice-como-expo) */
 .arvore { position: fixed; top: var(--sp-4); left: var(--sp-4); width: 250px; max-height: 88vh; overflow: auto;
   background: var(--surface); border-radius: var(--radius-2xl); padding: var(--sp-3); font-size: var(--fs-sm); z-index: 10; }
-.arvore-botao { background: none; border: 0; font: inherit; font-weight: 600; color: var(--forest); cursor: pointer; padding: var(--sp-1); }
 .arvore.fechado .arvore-corpo { display: none; }
+@media (min-width: 1280px) {
+  .arvore { top: 0; bottom: 0; left: 0; max-height: none; border-radius: 0; border-right: 1px solid var(--border); }
+  .arvore-botao { float: right; }
+  .arvore.fechado .arvore-botao { float: none; }
+  .arvore.fechado { width: 44px; padding: var(--sp-2) 0; text-align: center; }
+}
 .arvore .atalhos { margin: var(--sp-2) 0; color: var(--text-secondary); }
 .arvore details { margin: var(--sp-1) 0; }
 .arvore summary { cursor: pointer; font-weight: 600; padding: var(--sp-1) 0; }
