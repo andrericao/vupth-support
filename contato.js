@@ -1,9 +1,9 @@
 // Formulário de contato (DEC-59/60): POST /support/contact no Backend.
-// Fica desligado até o endpoint existir (item BAK formulario-do-suporte).
+// Ligado em 17/10 (André autorizou; Backend 7d13ffa com perfil e categoria no e-mail).
 (function () {
   "use strict";
   var ENDPOINT = "https://vupth-backend-ia.onrender.com/support/contact";
-  var ATIVO = false;
+  var ATIVO = true;
 
   var form = document.getElementById("form");
   var aviso = document.getElementById("aviso");
