@@ -45,7 +45,7 @@
         else if (r.status === 429) aviso.textContent = "Muitas mensagens em pouco tempo. Tente mais tarde.";
         else aviso.textContent = "Não foi possível enviar agora. Tente de novo em instantes.";
       })
-      .catch(function () { aviso.textContent = "Sem conexão com o servidor. Tente de novo."; })
+      .catch(function () { aviso.textContent = "Sem conexão. Tente de novo."; })
       .then(function () { botao.disabled = false; });
   });
 })();

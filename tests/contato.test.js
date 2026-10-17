@@ -62,6 +62,23 @@ describe("contato", () => {
     preenche(completo);
     document.getElementById("form").dispatchEvent(new Event("submit", { cancelable: true }));
     await espera();
-    expect(document.getElementById("aviso").textContent).toBe("Sem conexão com o servidor. Tente de novo.");
+    expect(document.getElementById("aviso").textContent).toBe("Sem conexão. Tente de novo.");
+  });
+});
+
+describe("sem explicação de servidor acordando", () => {
+  test("o site não menciona 'preparando servidor'", () => {
+    const fs = require("fs");
+    const path = require("path");
+    const raiz = path.resolve(__dirname, "..");
+    const achados = [];
+    (function varre(dir) {
+      fs.readdirSync(dir, { withFileTypes: true }).forEach((e) => {
+        const p = path.join(dir, e.name);
+        if (e.isDirectory()) { if (!["node_modules", ".git", "coverage", "tests"].includes(e.name)) varre(p); return; }
+        if (/\.(html|js|json)$/.test(e.name) && e.name !== "package-lock.json" && /preparando servidor|servidor (dorme|est[aá] acordando)/i.test(fs.readFileSync(p, "utf8"))) achados.push(path.relative(raiz, p));
+      });
+    })(raiz);
+    expect(achados).toEqual([]);
   });
 });

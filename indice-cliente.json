@@ -192,20 +192,6 @@
     "publico": "cliente"
   },
   {
-    "arquivo": "artigos/cliente/preparando-servidor.html",
-    "titulo": "“Preparando servidor...” ao abrir",
-    "resumo": "A primeira abertura pode levar até um minuto.",
-    "palavras": [
-      "preparando servidor",
-      "demora",
-      "lento",
-      "carregando",
-      "abrir o app"
-    ],
-    "categoria": "Problemas comuns",
-    "publico": "cliente"
-  },
-  {
     "arquivo": "artigos/cliente/avaliar-atendimento.html",
     "titulo": "Avaliar o atendimento",
     "resumo": "Dar a sua nota depois que o atendimento termina.",
