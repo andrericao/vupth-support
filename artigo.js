@@ -238,6 +238,12 @@ function lateral(painel, botao, rotulo, setaFechar, setaAbrir, lado, largura) {
   function aplica(sim, grava) {
     painel.classList.toggle("fechado", !sim);
     botao.textContent = sim ? setaFechar : setaAbrir;
+    if (!sim) {
+      var rot = document.createElement("span");
+      rot.className = "rot";
+      rot.textContent = " " + rotulo;
+      botao.appendChild(rot);
+    }
     botao.setAttribute("aria-expanded", sim ? "true" : "false");
     botao.setAttribute("aria-label", (sim ? "Recolher " : "Expandir ") + rotulo);
     botao.title = (sim ? "Recolher " : "Expandir ") + rotulo;

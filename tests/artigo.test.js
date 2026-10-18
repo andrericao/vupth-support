@@ -19,6 +19,15 @@ describe("artigo", () => {
     expect(document.querySelector(".arvore li.aqui")).not.toBeNull();
   });
 
+  test("laterais recolhidas mostram o rótulo ao lado da seta", async () => {
+    await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");
+    const botoes = document.querySelectorAll(".arvore-botao, .indice-botao");
+    expect(botoes.length).toBe(2);
+    botoes.forEach((b) => expect(b.querySelector(".rot")).not.toBeNull());
+    expect(document.querySelector(".arvore-botao").textContent).toMatch(/»\s+Assuntos/);
+    expect(document.querySelector(".indice-botao").textContent).toMatch(/«\s+Nesta página/);
+  });
+
   test("artigo que depende de outro mostra 'Antes disso' com o título real", async () => {
     await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");
     const antes = document.querySelector(".antes");
