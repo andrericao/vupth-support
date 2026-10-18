@@ -213,5 +213,24 @@
       "profissional",
       "dono"
     ]
+  },
+  {
+    "arquivo": "artigos/parceiro/por-que-o-preco-muda.html",
+    "titulo": "Por que o preço do cliente muda conforme o valor",
+    "resumo": "Você recebe o preço que define; o cliente paga também as taxas do pagamento.",
+    "palavras": [
+      "preço",
+      "valor",
+      "taxa",
+      "gateway",
+      "Asaas",
+      "Pix",
+      "cartão",
+      "acréscimo",
+      ",90",
+      "arredondamento"
+    ],
+    "categoria": "Seu perfil",
+    "publico": "parceiro"
   }
 ]

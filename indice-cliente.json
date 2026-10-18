@@ -300,5 +300,24 @@
     ],
     "categoria": "Atrasos e multas",
     "publico": "cliente"
+  },
+  {
+    "arquivo": "artigos/cliente/por-que-o-preco-muda.html",
+    "titulo": "Por que o preço muda conforme o valor",
+    "resumo": "O preço inclui as taxas do pagamento; por isso o acréscimo é maior em serviços mais baratos.",
+    "palavras": [
+      "preço",
+      "valor",
+      "taxa",
+      "gateway",
+      "Asaas",
+      "Pix",
+      "cartão",
+      "acréscimo",
+      ",90",
+      "arredondamento"
+    ],
+    "categoria": "Atrasos e multas",
+    "publico": "cliente"
   }
 ]
