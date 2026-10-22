@@ -79,10 +79,6 @@
       var lado = document.createElement("nav");
       lado.className = "arvore fechado";
       lado.setAttribute("aria-label", "Assuntos");
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "arvore-botao";
-      lado.appendChild(btn);
       var corpo = document.createElement("div");
       corpo.className = "arvore-corpo";
       var atalhos = document.createElement("p");
@@ -92,6 +88,7 @@
         var a = document.createElement("a"); a.href = p[1]; a.textContent = p[0]; atalhos.appendChild(a);
       });
       corpo.appendChild(atalhos);
+      var chipsEsq = [];
       grupos.forEach(function (g) {
         var det = document.createElement("details");
         var sum = document.createElement("summary");
@@ -109,10 +106,11 @@
         });
         det.appendChild(ul);
         corpo.appendChild(det);
+        chipsEsq.push({ texto: iniciais(g.nome), titulo: g.nome, aoClicar: function () { det.open = true; } });
       });
       lado.appendChild(corpo);
       document.body.appendChild(lado);
-      lateral(lado, btn, "Assuntos", "«", "»", "esq", 1280);
+      lateral(lado, "Assuntos", "esq", 1280, chipsEsq);
 
       // Anterior / Próximo
       var cartoes = document.createElement("div");
@@ -195,9 +193,6 @@
   var nav = document.createElement("nav");
   nav.className = "indice";
   nav.setAttribute("aria-label", "Nesta página");
-  var botao = document.createElement("button");
-  botao.type = "button";
-  botao.className = "indice-botao";
   var ul = document.createElement("ul");
   var links = {};
   itens.forEach(function (i) {
@@ -210,11 +205,12 @@
     ul.appendChild(li);
     links[i.id] = li;
   });
-  nav.appendChild(botao);
   nav.appendChild(ul);
   document.body.appendChild(nav);
 
-  lateral(nav, botao, "Nesta página", "»", "«", "dir", 1100);
+  var chipsDir = [];
+  itens.forEach(function (i) { if (!i.nivel) chipsDir.push({ texto: String(chipsDir.length + 1), titulo: i.rotulo, href: "#" + i.id }); });
+  lateral(nav, "Nesta página", "dir", 1100, chipsDir);
 
   if ("IntersectionObserver" in window) {
     var visiveis = {};
@@ -229,27 +225,72 @@
   }
 })();
 
-// Lateral recolhível (indices-recolhiveis): botão com ícone, estado guardado no navegador;
-// recolhida, vira uma faixa fina só com o botão. Sem estado guardado, recolhida no celular.
-function lateral(painel, botao, rotulo, setaFechar, setaAbrir, lado, largura) {
+// Iniciais de um assunto para o ícone da faixa recolhida (duas letras, como no vupth-docs).
+function iniciais(nome) {
+  var ps = nome.split(/[^A-Za-zÀ-ÿ]+/).filter(Boolean);
+  return (ps.length > 1 ? ps[0][0] + ps[1][0] : nome.slice(0, 2)).toUpperCase();
+}
+
+// Lateral estilo Render (laterais-estilo-render): expandida, o conteúdo e o controle "Recolher" no pé;
+// recolhida (tela larga), uma coluna de ícones com tooltip e o mesmo controle no mesmo lugar.
+// Em tela estreita é gaveta: fechada some e deixa só o botão flutuante; abre por ele, fecha por
+// "Fechar", Esc ou ao tocar num link. O estado guardado só vale em tela larga.
+function lateral(painel, rotulo, lado, largura, chips) {
   "use strict";
   var chave = "vupth-suporte-lado-" + lado, guardado = null;
   try { guardado = localStorage.getItem(chave); } catch { /* sem armazenamento ou rede: segue sem */ }
+  function larga() { return window.innerWidth >= largura; }
+  var esq = lado === "esq";
+
+  var trilho = document.createElement("div");
+  trilho.className = "trilho";
+  chips.forEach(function (c) {
+    var el = document.createElement(c.href ? "a" : "button");
+    if (c.href) el.href = c.href; else el.type = "button";
+    el.className = "chip";
+    el.textContent = c.texto;
+    el.title = c.titulo;
+    el.setAttribute("aria-label", c.titulo);
+    if (c.aoClicar) el.addEventListener("click", function () { aplica(true, true); c.aoClicar(); });
+    trilho.appendChild(el);
+  });
+  painel.appendChild(trilho);
+
+  var ctl = document.createElement("button");
+  ctl.type = "button";
+  ctl.className = "lado-ctl";
+  var ico = document.createElement("span");
+  ico.className = "ico";
+  var rot = document.createElement("span");
+  rot.className = "rot";
+  ctl.appendChild(ico);
+  ctl.appendChild(rot);
+  painel.appendChild(ctl);
+
+  var abrir = document.createElement("button");
+  abrir.type = "button";
+  abrir.className = "lado-abrir " + lado;
+  abrir.textContent = (esq ? "» " : "« ") + rotulo;
+  document.body.appendChild(abrir);
+
   function aplica(sim, grava) {
     painel.classList.toggle("fechado", !sim);
-    botao.textContent = sim ? setaFechar : setaAbrir;
-    if (!sim) {
-      var rot = document.createElement("span");
-      rot.className = "rot";
-      rot.textContent = " " + rotulo;
-      botao.appendChild(rot);
-    }
-    botao.setAttribute("aria-expanded", sim ? "true" : "false");
-    botao.setAttribute("aria-label", (sim ? "Recolher " : "Expandir ") + rotulo);
-    botao.title = (sim ? "Recolher " : "Expandir ") + rotulo;
-    if (grava) { try { localStorage.setItem(chave, sim ? "0" : "1"); } catch { /* sem armazenamento ou rede: segue sem */ } }
+    abrir.hidden = sim;
+    ico.textContent = sim === esq ? "«" : "»";
+    rot.textContent = !sim ? "Expandir" : larga() ? "Recolher" : "Fechar";
+    ctl.setAttribute("aria-expanded", sim ? "true" : "false");
+    ctl.setAttribute("aria-label", (sim ? "Recolher " : "Expandir ") + rotulo);
+    ctl.title = (sim ? "Recolher " : "Expandir ") + rotulo;
+    if (grava && larga()) { try { localStorage.setItem(chave, sim ? "0" : "1"); } catch { /* sem armazenamento ou rede: segue sem */ } }
   }
-  aplica(guardado === null ? window.innerWidth >= largura : guardado === "0", false);
-  botao.addEventListener("click", function () { aplica(painel.classList.contains("fechado"), true); });
+  aplica(larga() && guardado !== "1", false);
+  ctl.addEventListener("click", function () { aplica(painel.classList.contains("fechado"), true); });
+  abrir.addEventListener("click", function () { aplica(true, false); ctl.focus(); });
+  painel.addEventListener("click", function (e) {
+    if (!larga() && e.target.closest("a")) aplica(false, false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !larga() && !painel.classList.contains("fechado")) { aplica(false, false); abrir.focus(); }
+  });
   return aplica;
 }

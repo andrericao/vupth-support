@@ -7,7 +7,7 @@ async function abre(arquivo, url) {
   await espera();
 }
 
-beforeEach(() => { localStorage.clear(); });
+beforeEach(() => { localStorage.clear(); window.innerWidth = 1024; });
 
 describe("artigo", () => {
   test("monta árvore, 'Nesta página', cartões e rodapé", async () => {
@@ -19,13 +19,30 @@ describe("artigo", () => {
     expect(document.querySelector(".arvore li.aqui")).not.toBeNull();
   });
 
-  test("laterais recolhidas mostram o rótulo ao lado da seta", async () => {
+  test("laterais têm o controle no pé, com rótulo e tooltip", async () => {
     await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");
-    const botoes = document.querySelectorAll(".arvore-botao, .indice-botao");
-    expect(botoes.length).toBe(2);
-    botoes.forEach((b) => expect(b.querySelector(".rot")).not.toBeNull());
-    expect(document.querySelector(".arvore-botao").textContent).toMatch(/»\s+Assuntos/);
-    expect(document.querySelector(".indice-botao").textContent).toMatch(/«\s+Nesta página/);
+    const ctls = document.querySelectorAll(".lado-ctl");
+    expect(ctls.length).toBe(2);
+    ctls.forEach((c) => { expect(c.parentElement.lastElementChild).toBe(c); expect(c.title).toMatch(/Recolher|Expandir/); });
+    expect(document.querySelectorAll(".lado-abrir").length).toBe(2);
+  });
+
+  test("faixa recolhida: ícones com tooltip; o assunto expande a árvore", async () => {
+    window.innerWidth = 1400;
+    await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");
+    const arvore = document.querySelector("nav.arvore");
+    const ctl = arvore.querySelector(".lado-ctl");
+    ctl.click();
+    expect(arvore.classList.contains("fechado")).toBe(true);
+    expect(ctl.querySelector(".rot").textContent).toBe("Expandir");
+    const chip = arvore.querySelector(".trilho .chip");
+    expect(chip.title).not.toBe("");
+    expect(chip.getAttribute("aria-label")).toBe(chip.title);
+    chip.click();
+    expect(arvore.classList.contains("fechado")).toBe(false);
+    const indiceLateral = document.querySelector("nav.indice");
+    const link = indiceLateral.querySelector(".trilho a.chip");
+    expect(link.getAttribute("href")).toMatch(/^#/);
   });
 
   test("artigo que depende de outro mostra 'Antes disso' com o título real", async () => {
@@ -64,23 +81,49 @@ describe("artigo", () => {
     expect(document.querySelector(".util p").textContent).toBe("Obrigado pelo retorno.");
   });
 
-  test("laterais recolhem e lembram o estado", async () => {
+  test("laterais recolhem e lembram o estado (tela larga)", async () => {
+    window.innerWidth = 1400;
     await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");
     const arvore = document.querySelector("nav.arvore");
-    const botao = arvore.querySelector(".arvore-botao");
-    const antes = arvore.classList.contains("fechado");
-    botao.click();
-    expect(arvore.classList.contains("fechado")).toBe(!antes);
-    expect(localStorage.getItem("vupth-suporte-lado-esq")).toBe(antes ? "0" : "1");
-    const indiceLateral = document.querySelector("nav.indice");
-    indiceLateral.querySelector(".indice-botao").click();
-    expect(localStorage.getItem("vupth-suporte-lado-dir")).not.toBeNull();
+    expect(arvore.classList.contains("fechado")).toBe(false);
+    arvore.querySelector(".lado-ctl").click();
+    expect(arvore.classList.contains("fechado")).toBe(true);
+    expect(localStorage.getItem("vupth-suporte-lado-esq")).toBe("1");
+    document.querySelector("nav.indice .lado-ctl").click();
+    expect(localStorage.getItem("vupth-suporte-lado-dir")).toBe("1");
   });
 
-  test("estado guardado manda sobre o tamanho da tela", async () => {
+  test("estado guardado manda em tela larga", async () => {
+    window.innerWidth = 1400;
     localStorage.setItem("vupth-suporte-lado-esq", "1");
     await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");
     expect(document.querySelector("nav.arvore").classList.contains("fechado")).toBe(true);
+  });
+
+  test("tela estreita: gaveta fechada, abre pelo botão flutuante, fecha por Esc, Fechar e link", async () => {
+    window.innerWidth = 600;
+    localStorage.setItem("vupth-suporte-lado-esq", "0");
+    await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");
+    const arvore = document.querySelector("nav.arvore");
+    const abrir = document.querySelector(".lado-abrir.esq");
+    expect(arvore.classList.contains("fechado")).toBe(true);
+    expect(abrir.hidden).toBe(false);
+    abrir.click();
+    expect(arvore.classList.contains("fechado")).toBe(false);
+    expect(abrir.hidden).toBe(true);
+    expect(arvore.querySelector(".lado-ctl .rot").textContent).toBe("Fechar");
+    expect(localStorage.getItem("vupth-suporte-lado-esq")).toBe("0");
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+    expect(arvore.classList.contains("fechado")).toBe(true);
+    abrir.click();
+    arvore.querySelector(".lado-ctl").click();
+    expect(arvore.classList.contains("fechado")).toBe(true);
+    abrir.click();
+    const a = arvore.querySelector(".arvore-corpo a");
+    a.addEventListener("click", (e) => e.preventDefault());
+    a.click();
+    expect(arvore.classList.contains("fechado")).toBe(true);
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
   });
 
   test("artigo do Partner usa o índice do parceiro", async () => {
