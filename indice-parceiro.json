@@ -192,6 +192,26 @@
     ]
   },
   {
+    "arquivo": "artigos/parceiro/excluir-conta-de-dono.html",
+    "titulo": "Excluir a conta de dono",
+    "resumo": "Por que o app pede para apagar a loja ou passar a posse antes de excluir a conta, e como fazer.",
+    "palavras": [
+      "excluir conta",
+      "dono",
+      "apagar loja",
+      "excluir loja",
+      "passar a posse",
+      "você ainda é dono de uma loja",
+      "posse",
+      "deletar conta"
+    ],
+    "categoria": "Conta",
+    "publico": "parceiro",
+    "perfis": [
+      "dono"
+    ]
+  },
+  {
     "arquivo": "artigos/parceiro/chave-pix.html",
     "titulo": "Sua chave Pix",
     "resumo": "A chave é sua: o cliente copia e paga direto a você.",
