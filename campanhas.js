@@ -13,7 +13,11 @@
   var lista = document.getElementById("lista");
   var todas = [];
 
-  function reais(v) { return "R$ " + Number(v).toFixed(2).replace(".", ","); }
+  // Sempre "R$ 53,90" e "R$ 1.234,56" (valor-em-reais-padronizado).
+  function reais(v) {
+    var n = Number(v), p = Math.abs(n).toFixed(2).split(".");
+    return (n < 0 ? "-" : "") + "R$ " + p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "," + p[1];
+  }
 
   function ganho(c) {
     var valor = c.value_percent != null ? c.value_percent + "%" : c.value_amount != null ? reais(c.value_amount) : "";
