@@ -148,6 +148,21 @@
     "publico": "cliente"
   },
   {
+    "arquivo": "artigos/cliente/chegada-e-nao-cheguei.html",
+    "titulo": "Aviso de chegada e “Não cheguei”",
+    "resumo": "Quando o app pede que você esteja na loja, quanto tempo você tem e quando a falta vira atraso.",
+    "palavras": [
+      "não cheguei",
+      "aviso de chegada",
+      "esteja na loja",
+      "tolerância",
+      "atraso",
+      "10 minutos"
+    ],
+    "categoria": "Atrasos e multas",
+    "publico": "cliente"
+  },
+  {
     "arquivo": "artigos/cliente/multas.html",
     "titulo": "Multas: quando e como são cobradas",
     "resumo": "As duas situações com multa e onde o valor aparece.",
