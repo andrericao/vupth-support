@@ -13,7 +13,8 @@ const PARES = {
 
 const vars = (bloco) => Object.fromEntries([...bloco.matchAll(/--([\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
 const claro = vars(css.match(/:root \{([\s\S]*?)\n\}/)[1]);
-const escuro = vars(css.match(/prefers-color-scheme: dark\) \{\s*:root \{([\s\S]*?)\n {2}\}/)[1]);
+const escuro = vars(css.match(/prefers-color-scheme: dark\) \{\s*:root:not\(\[data-tema="claro"\]\) \{([\s\S]*?)\n {2}\}/)[1]);
+const escuroForcado = vars(css.match(/:root\[data-tema="escuro"\] \{([\s\S]*?)\n\}/)[1]);
 
 const luz = (hex) => {
   const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
@@ -51,8 +52,13 @@ describe("tema do tokens.json", () => {
       expect(razao(t[PARES[v.texto]], t[PARES[v.fundo]])).toBeGreaterThanOrEqual(v.minimo);
     });
 
+  test("o botão 'Escuro' dá as mesmas cores do sistema escuro", () => {
+    expect(escuroForcado).toEqual(escuro);
+  });
+
   test("nenhuma cor escrita à mão fora das variáveis", () => {
-    const fora = css.replace(/:root \{[\s\S]*?\n\}/, "").replace(/@media \(prefers-color-scheme: dark\) \{[\s\S]*?\n {2}\}\n\}/, "");
+    const fora = css.replace(/:root \{[\s\S]*?\n\}/, "").replace(/@media \(prefers-color-scheme: dark\) \{[\s\S]*?\n {2}\}\n\}/, "")
+      .replace(/:root\[data-tema="escuro"\] \{[\s\S]*?\n\}/, "");
     expect(fora.match(/#[0-9a-fA-F]{3,8}\b/g)).toBeNull();
     expect(fora.match(/rgba?\(/g)).toBeNull();
   });
