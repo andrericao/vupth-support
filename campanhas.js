@@ -48,10 +48,16 @@
       var h = document.createElement("h2");
       h.textContent = c.name;
       card.appendChild(h);
+      var g = ganho(c);
+      if (g) {
+        var v = document.createElement("p");
+        v.className = "valor";
+        v.textContent = g;
+        card.appendChild(v);
+      }
       var dias = c.weekdays ? c.weekdays.split(",").map(function (d) { return DIAS[d.trim()] || d; }).join(", ") : null;
       var vagas = c.remaining_slots != null ? c.remaining_slots + (c.max_redemptions != null ? " de " + c.max_redemptions : "") : null;
       [
-        linha("O que você ganha", ganho(c)),
         linha("Regras", c.description),
         linha("Só para quem nunca cortou pelo app", c.new_clients_only ? "sim" : null),
         linha("Dias da semana", dias),
