@@ -28,7 +28,7 @@ describe("valor em reais padronizado", () => {
 
   test("campanhas.js escreve o valor com vírgula e ponto de milhar", async () => {
     pagina("campanhas.html", "/campanhas.html");
-    const fonte = fs.readFileSync(path.join(raiz, "campanhas.js"), "utf8").replace("var ATIVO = false", "var ATIVO = true");
+    const fonte = fs.readFileSync(path.join(raiz, "campanhas.js"), "utf8");
     global.fetch = jest.fn(() => Promise.resolve({
       ok: true,
       json: () => Promise.resolve([

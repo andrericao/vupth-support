@@ -1,10 +1,10 @@
 // "Cupons e promoções" (SUP-10): lê GET /campaigns/active (público) e mostra por perfil.
 // Campos conforme o Backend (backend.html, Solicitadas 15/10 16h15, 4a94610 + 2dd32f9).
-// Desligada até a branch `campanhas` do Backend subir.
+// Ligada: o Backend já serve /campaigns/active em produção (cards-de-campanhas-ativas).
 (function () {
   "use strict";
   var ENDPOINT = "https://vupth-backend-ia.onrender.com/campaigns/active";
-  var ATIVO = false;
+  var ATIVO = true;
 
   var AUDIENCIA = { cliente: "CLIENT", profissional: "PROFESSIONAL", dono: "OWNER" };
   var DIAS = { MONDAY: "segunda", TUESDAY: "terça", WEDNESDAY: "quarta", THURSDAY: "quinta", FRIDAY: "sexta", SATURDAY: "sábado", SUNDAY: "domingo" };
