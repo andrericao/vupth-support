@@ -290,10 +290,10 @@ h2, h3 { font-weight: 700; } /* heading */
 .tema-btn:hover, .tema-btn:focus-visible { border-color: var(--text-secondary); }
 
 /* Cards de campanhas ativas (cards-de-campanhas-ativas): ticket pontilhado, mockup 2 do Client (André, 24/10) */
-#lista article { position: relative; background: var(--surface); color: var(--text-primary); border: 2px dashed var(--border); border-radius: var(--radius-card); padding: var(--sp-4) var(--sp-4) var(--sp-4) 20px; margin: var(--sp-4) 10px; }
-#lista article::before, #lista article::after { content: ""; position: absolute; top: 50%; width: 16px; height: 16px; margin-top: -8px; background: var(--bg); border: 2px dashed var(--border); border-radius: var(--radius-full); }
+#lista article { position: relative; background: var(--green-tint); color: var(--on-green-tint); border: 2px dotted var(--on-green-tint); border-radius: var(--radius-card); padding: var(--sp-4) var(--sp-4) var(--sp-4) 20px; margin: var(--sp-4) 10px; }
+#lista article::before, #lista article::after { content: ""; position: absolute; top: 50%; width: 16px; height: 16px; margin-top: -8px; background: var(--bg); border: 2px dotted var(--on-green-tint); border-radius: var(--radius-full); }
 #lista article::before { left: -10px; }
 #lista article::after { right: -10px; }
 #lista article h2 { margin: 0; font-family: var(--font-heading); font-size: var(--fs-md); }
-#lista article p { margin: var(--sp-1) 0; color: var(--text-secondary); font-size: var(--fs-sm); }
-#lista article p.valor { font-family: var(--font-heading); font-weight: 800; font-size: var(--fs-xxl); letter-spacing: -1px; color: var(--text-primary); }
+#lista article p { margin: var(--sp-1) 0; color: inherit; font-size: var(--fs-sm); }
+#lista article p.valor { font-family: var(--font-heading); font-weight: 800; font-size: var(--fs-xxl); letter-spacing: -1px; color: inherit; }
