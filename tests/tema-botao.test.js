@@ -17,7 +17,7 @@ describe("alternar tema", () => {
     expect(raiz.hasAttribute("data-tema")).toBe(false);
     expect(botoes().map((b) => b.textContent)).toEqual(["Claro", "Escuro", "Sistema"]);
     expect(marcado()).toBe("sistema");
-    expect(document.querySelector("main").firstElementChild.className).toBe("tema-ctl");
+    expect(document.querySelector(".topo-marca").firstElementChild.className).toBe("tema-ctl");
   });
 
   test("escolher escuro aplica, marca e guarda; sistema volta ao padrão", () => {

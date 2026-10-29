@@ -25,7 +25,7 @@
   }
 
   function monta() {
-    var onde = document.querySelector(".topo") || document.querySelector("main");
+    var onde = document.querySelector(".topo") || document.querySelector(".topo-marca") || document.querySelector("main");
     if (!onde) return;
     var grupo = document.createElement("div");
     grupo.className = "tema-ctl";
