@@ -1,9 +1,8 @@
-// alternar-tema-claro-escuro: claro, escuro ou o sistema. A escolha fica no aparelho
+// alternar-tema-claro-escuro: um botão claro/escuro (um-botao-de-tema-como-o-docs); sem escolha, vale o sistema. A escolha fica no aparelho
 // (localStorage, com try/catch) e é aplicada no <head>, antes de pintar, para não piscar.
 // "sistema" é o padrão: sem atributo, vale o prefers-color-scheme do estilo.css.
 (function () {
   var CHAVE = "vupth-tema";
-  var OPCOES = [["claro", "Claro"], ["escuro", "Escuro"], ["sistema", "Sistema"]];
 
   function le() {
     try {
@@ -24,30 +23,34 @@
     else raiz.setAttribute("data-tema", tema);
   }
 
+  // Um só botão, como no vupth-docs: mostra o tema para onde vai ("☀️ Claro" no escuro, "🌙 Escuro" no claro).
+  function escuro() {
+    var t = document.documentElement.getAttribute("data-tema");
+    return t ? t === "escuro" : !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }
+
   function monta() {
     var onde = document.querySelector(".topo") || document.querySelector(".topo-marca") || document.querySelector("main");
     if (!onde) return;
     var grupo = document.createElement("div");
     grupo.className = "tema-ctl";
-    grupo.setAttribute("role", "group");
-    grupo.setAttribute("aria-label", "Tema");
-    var botoes = OPCOES.map(function (o) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.textContent = o[1];
-      b.dataset.tema = o[0];
-      b.addEventListener("click", function () {
-        guarda(o[0]);
-        aplica(o[0]);
-        marca(o[0]);
-      });
-      grupo.appendChild(b);
-      return b;
-    });
-    function marca(tema) {
-      botoes.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tema === tema)); });
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "tema-btn";
+    b.setAttribute("aria-live", "polite");
+    function rotulo() {
+      var vaiClaro = escuro();
+      b.textContent = vaiClaro ? "☀️ Claro" : "🌙 Escuro";
+      b.dataset.tema = vaiClaro ? "claro" : "escuro";
     }
-    marca(le());
+    b.addEventListener("click", function () {
+      var prox = escuro() ? "claro" : "escuro";
+      guarda(prox);
+      aplica(prox);
+      rotulo();
+    });
+    rotulo();
+    grupo.appendChild(b);
     onde.insertBefore(grupo, onde.firstChild);
   }
 

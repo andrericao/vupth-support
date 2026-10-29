@@ -285,9 +285,9 @@ h2, h3 { font-weight: 700; } /* heading */
 .tema-ctl { display: flex; justify-content: flex-end; gap: var(--sp-1); margin: 0 0 var(--sp-3); }
 .topo { position: relative; }
 .topo .tema-ctl, .topo-marca .tema-ctl { position: absolute; top: var(--sp-3); right: var(--sp-4); margin: 0; }
-.tema-ctl button { border: 2px solid var(--border); border-radius: var(--radius-full); background: var(--bg); color: var(--text-primary);
-  font: 600 var(--fs-xs) var(--font-body); padding: var(--sp-1) var(--sp-3); cursor: pointer; }
-.tema-ctl button[aria-pressed="true"] { background: var(--green-tint); color: var(--on-green-tint); border-color: var(--text-primary); }
+.tema-btn { border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); color: var(--text-primary);
+  font: 600 var(--fs-sm) var(--font-body); padding: var(--sp-1) var(--sp-3); cursor: pointer; }
+.tema-btn:hover, .tema-btn:focus-visible { border-color: var(--text-secondary); }
 
 /* Cards de campanhas ativas (cards-de-campanhas-ativas): ticket pontilhado, mockup 2 do Client (André, 24/10) */
 #lista article { position: relative; background: var(--surface); color: var(--text-primary); border: 2px dashed var(--border); border-radius: var(--radius-card); padding: var(--sp-4) var(--sp-4) var(--sp-4) 20px; margin: var(--sp-4) 10px; }

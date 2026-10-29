@@ -2,7 +2,7 @@ const { pagina, roda } = require("./ajuda");
 
 const raiz = document.documentElement;
 const botoes = () => [...document.querySelectorAll(".tema-ctl button")];
-const marcado = () => botoes().find((b) => b.getAttribute("aria-pressed") === "true").dataset.tema;
+const sistemaEscuro = (sim) => { window.matchMedia = (q) => ({ matches: sim && q.includes("dark") }); };
 
 beforeEach(() => {
   localStorage.clear();
@@ -11,33 +11,44 @@ beforeEach(() => {
 });
 
 describe("alternar tema", () => {
-  test("sem escolha, segue o sistema e o botão 'Sistema' fica marcado", () => {
+  afterEach(() => { delete window.matchMedia; });
+
+  test("um só botão; sem escolha segue o sistema e oferece o outro tema", () => {
+    sistemaEscuro(false);
     pagina("artigos/cliente/multas.html", "/artigos/cliente/multas.html");
     roda("tema.js");
     expect(raiz.hasAttribute("data-tema")).toBe(false);
-    expect(botoes().map((b) => b.textContent)).toEqual(["Claro", "Escuro", "Sistema"]);
-    expect(marcado()).toBe("sistema");
+    expect(botoes().map((b) => b.textContent)).toEqual(["🌙 Escuro"]);
     expect(document.querySelector(".topo-marca").firstElementChild.className).toBe("tema-ctl");
   });
 
-  test("escolher escuro aplica, marca e guarda; sistema volta ao padrão", () => {
+  test("sistema escuro: o botão oferece Claro", () => {
+    sistemaEscuro(true);
+    pagina("index.html", "/index.html");
+    roda("tema.js");
+    expect(botoes()[0].textContent).toBe("☀️ Claro");
+  });
+
+  test("clicar alterna claro/escuro, guarda e troca o rótulo", () => {
+    sistemaEscuro(false);
     pagina("artigos/cliente/multas.html", "/artigos/cliente/multas.html");
     roda("tema.js");
-    botoes()[1].click();
+    botoes()[0].click();
     expect(raiz.getAttribute("data-tema")).toBe("escuro");
-    expect(marcado()).toBe("escuro");
     expect(localStorage.getItem("vupth-tema")).toBe("escuro");
-    botoes()[2].click();
-    expect(raiz.hasAttribute("data-tema")).toBe(false);
-    expect(localStorage.getItem("vupth-tema")).toBe("sistema");
+    expect(botoes()[0].textContent).toBe("☀️ Claro");
+    botoes()[0].click();
+    expect(raiz.getAttribute("data-tema")).toBe("claro");
+    expect(localStorage.getItem("vupth-tema")).toBe("claro");
+    expect(botoes()[0].textContent).toBe("🌙 Escuro");
   });
 
   test("a escolha guardada vale já ao carregar", () => {
-    localStorage.setItem("vupth-tema", "claro");
+    localStorage.setItem("vupth-tema", "escuro");
     pagina("index.html", "/index.html");
     roda("tema.js");
-    expect(raiz.getAttribute("data-tema")).toBe("claro");
-    expect(marcado()).toBe("claro");
+    expect(raiz.getAttribute("data-tema")).toBe("escuro");
+    expect(botoes()[0].textContent).toBe("☀️ Claro");
     expect(document.querySelector(".topo").firstElementChild.className).toBe("tema-ctl");
   });
 
@@ -54,7 +65,7 @@ describe("alternar tema", () => {
     pagina("index.html", "/index.html");
     roda("tema.js");
     botoes()[0].click();
-    expect(raiz.getAttribute("data-tema")).toBe("claro");
+    expect(raiz.getAttribute("data-tema")).toBe("escuro");
     get.mockRestore();
     set.mockRestore();
   });
