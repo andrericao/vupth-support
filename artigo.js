@@ -1,4 +1,8 @@
 // Artigos: índice lateral recolhível (SUP-2) e caixa "Antes disso" (SUP-4).
+
+// Ícone do botão das laterais: o mesmo do vupth-docs (quadro com divisória), espelhado na direita por CSS.
+var ICONE_LADO = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>';
+
 (function () {
   "use strict";
 
@@ -263,9 +267,13 @@ function lateral(painel, rotulo, lado, largura, chips) {
   ico.className = "ico";
   var rot = document.createElement("span");
   rot.className = "rot";
+  ico.innerHTML = ICONE_LADO;
   ctl.appendChild(ico);
   ctl.appendChild(rot);
-  painel.appendChild(ctl);
+  var rodape = document.createElement("div");
+  rodape.className = "lado-rodape " + lado;
+  rodape.appendChild(ctl);
+  painel.appendChild(rodape);
 
   var abrir = document.createElement("button");
   abrir.type = "button";
@@ -276,7 +284,6 @@ function lateral(painel, rotulo, lado, largura, chips) {
   function aplica(sim, grava) {
     painel.classList.toggle("fechado", !sim);
     abrir.hidden = sim;
-    ico.textContent = sim === esq ? "«" : "»";
     rot.textContent = !sim ? "Expandir" : larga() ? "Recolher" : "Fechar";
     ctl.setAttribute("aria-expanded", sim ? "true" : "false");
     ctl.setAttribute("aria-label", (sim ? "Recolher " : "Expandir ") + rotulo);

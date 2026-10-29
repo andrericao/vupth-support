@@ -27,6 +27,13 @@ describe("artigo", () => {
     expect(document.querySelectorAll(".lado-abrir").length).toBe(2);
   });
 
+  test("botão das laterais igual ao do vupth-docs: ícone de painel dentro do rodapé", async () => {
+    await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");
+    const rodapes = document.querySelectorAll(".lado-rodape");
+    expect([...rodapes].map((r) => r.classList.contains("esq") || r.classList.contains("dir"))).toEqual([true, true]);
+    rodapes.forEach((r) => expect(r.querySelector(".lado-ctl .ico svg rect")).not.toBeNull());
+  });
+
   test("faixa recolhida: ícones com tooltip; o assunto expande a árvore", async () => {
     window.innerWidth = 1400;
     await abre("artigos/cliente/entrar-na-fila.html", "/artigos/cliente/entrar-na-fila.html");

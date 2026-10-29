@@ -203,9 +203,15 @@ h2, h3 { font-weight: 700; } /* heading */
 .chip { display: flex; align-items: center; justify-content: center; width: 40px; height: 34px; margin: 0 auto var(--sp-1); border: 0; border-radius: var(--radius-lg);
   background: none; color: var(--text-secondary); font: 600 var(--fs-sm) var(--font-body); text-decoration: none; cursor: pointer; }
 .chip:hover, .chip:focus-visible { background: var(--green-tint); color: var(--on-green-tint); }
-.lado-ctl { display: flex; align-items: center; gap: var(--sp-2); width: 100%; margin-top: auto; position: sticky; bottom: 0; padding: var(--sp-2);
-  border: 0; border-top: 1px solid var(--border); background: var(--surface); color: var(--text-primary); font: 600 var(--fs-sm) var(--font-body); cursor: pointer; }
-.lado-ctl .ico { font-size: var(--fs-lg); line-height: 1; width: 24px; text-align: center; }
+/* Botão das laterais igual ao do vupth-docs (.lado-btn): quadrado de 28px, borda fina, ícone de painel; o rótulo só aparece na gaveta (tela estreita) */
+.lado-rodape { position: sticky; bottom: 0; margin-top: auto; display: flex; padding: var(--sp-2) 0 var(--sp-1); background: var(--surface); border-top: 1px solid var(--border); }
+.lado-ctl { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); min-width: 28px; height: 28px; padding: 0; border: 1px solid var(--border);
+  border-radius: var(--radius-md); background: var(--surface); color: var(--text-secondary); font: 600 var(--fs-sm) var(--font-body); cursor: pointer; }
+.lado-ctl:hover, .lado-ctl:focus-visible { color: var(--text-primary); border-color: var(--text-secondary); }
+.lado-ctl .ico { display: inline-flex; }
+.lado-rodape.dir .lado-ctl svg { transform: scaleX(-1); }
+.lado-ctl .rot { display: none; }
+@media (max-width: 1099px) { .lado-ctl { padding: 0 var(--sp-3); } .lado-ctl .rot { display: inline; } }
 .lado-abrir { position: fixed; bottom: var(--sp-3); z-index: 10; padding: var(--sp-2) var(--sp-3); border: 2px solid var(--border); border-radius: 999px;
   background: var(--surface); color: var(--text-primary); font: 600 var(--fs-sm) var(--font-body); cursor: pointer; }
 .lado-abrir[hidden] { display: none; }
@@ -216,7 +222,7 @@ h2, h3 { font-weight: 700; } /* heading */
   .indice { top: 0; bottom: 0; right: 0; max-height: none; border-radius: 0; border-left: 1px solid var(--border); }
   .indice.fechado { width: 56px; padding: var(--sp-3) var(--sp-2) 0; overflow: hidden; }
   .indice.fechado .trilho { display: block; }
-  .indice.fechado .lado-ctl .rot { display: none; }
+  .indice.fechado .lado-rodape { justify-content: center; }
   .lado-abrir.dir { display: none; }
 }
 @media (max-width: 1099px) {
@@ -240,7 +246,7 @@ h2, h3 { font-weight: 700; } /* heading */
   .arvore { top: 0; bottom: 0; left: 0; max-height: none; border-radius: 0; border-right: 1px solid var(--border); }
   .arvore.fechado { width: 56px; padding: var(--sp-3) var(--sp-2) 0; overflow: hidden; }
   .arvore.fechado .trilho { display: block; }
-  .arvore.fechado .lado-ctl .rot { display: none; }
+  .arvore.fechado .lado-rodape { justify-content: center; }
   .lado-abrir.esq { display: none; }
 }
 .arvore .atalhos { margin: var(--sp-2) 0; color: var(--text-secondary); }
