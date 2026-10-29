@@ -11,6 +11,14 @@ function carrega(resposta) {
 }
 
 describe("cards das campanhas ativas", () => {
+  test("variedade: cada card ganha uma variante (cor de acento e linha), repetindo a cada cinco", async () => {
+    const camp = (n) => ({ name: "C" + n, type: "DISCOUNT", audience: "CLIENT", value_amount: n });
+    carrega(Promise.resolve({ ok: true, json: () => Promise.resolve([1, 2, 3, 4, 5, 6].map(camp)) }));
+    await espera();
+    const classes = [...document.querySelectorAll("#lista article")].map((a) => a.className);
+    expect(classes).toEqual(["v0", "v1", "v2", "v3", "v4", "v0"]);
+  });
+
   test("lê a rota pública e mostra o card do perfil", async () => {
     carrega(Promise.resolve({ ok: true, json: () => Promise.resolve([
       { name: "Teste de 10 Reais", description: "Dez reais", type: "DISCOUNT", audience: "CLIENT", value_amount: 10, weekdays: "THURSDAY", code: "TESTE10", max_redemptions: 5, remaining_slots: 4, ends_at: "2026-10-29T02:59:59Z" },

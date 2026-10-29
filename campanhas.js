@@ -43,8 +43,9 @@
     lista.textContent = "";
     var itens = todas.filter(function (c) { return !c.audience || c.audience === AUDIENCIA[perfil]; });
     if (!itens.length) { lista.textContent = "Nenhuma campanha ativa para este perfil agora."; return; }
-    itens.forEach(function (c) {
+    itens.forEach(function (c, i) {
       var card = document.createElement("article");
+      card.className = "v" + (i % 5);
       var h = document.createElement("h2");
       h.textContent = c.name;
       card.appendChild(h);

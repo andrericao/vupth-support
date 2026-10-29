@@ -9,6 +9,8 @@ const PARES = {
   background: "bg", surface: "surface", surfaceAlt: "surface-alt", textPrimary: "text-primary",
   textSecondary: "text-secondary", textPlaceholder: "text-placeholder", border: "border",
   danger: "danger", dangerTint: "danger-tint",
+  accentPeach: "accent-peach", onAccentPeach: "on-accent-peach", accentBlue: "accent-blue", onAccentBlue: "on-accent-blue",
+  accentPink: "accent-pink", onAccentPink: "on-accent-pink", accentPlum: "accent-plum", onAccentPlum: "on-accent-plum",
 };
 
 const vars = (bloco) => Object.fromEntries([...bloco.matchAll(/--([\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
