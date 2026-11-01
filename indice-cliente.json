@@ -76,7 +76,7 @@
   {
     "arquivo": "artigos/cliente/acompanhar-a-vez.html",
     "titulo": "Acompanhar a sua vez",
-    "resumo": "A tela da fila: quantos faltam, o tempo estimado e quando ir para a loja.",
+    "resumo": "A tela da fila: cronômetro do tempo estimado, pessoas à frente, início estimado e quando ir para a loja.",
     "palavras": [
       "vez",
       "posição",
