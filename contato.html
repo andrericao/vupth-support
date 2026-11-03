@@ -25,6 +25,7 @@
       <select name="categoria"><option value="DUVIDA">Dúvida</option><option value="PROBLEMA">Problema</option><option value="PAGAMENTO">Pagamento</option><option value="SUGESTAO">Sugestão</option><option value="RECLAMACAO">Reclamação</option><option value="ELOGIO">Elogio</option><option value="FEEDBACK">Feedback sobre o app</option><option value="OUTRO">Outro</option></select></label></p>
     <p><label>Assunto<br><input type="text" name="assunto" required maxlength="120"></label></p>
     <p><label>Mensagem<br><textarea name="mensagem" required maxlength="2000" rows="6"></textarea></label></p>
+    <p aria-hidden="true" style="position:absolute;left:-9999px;height:0;overflow:hidden"><label>Não preencha este campo<input type="text" name="website" tabindex="-1" autocomplete="off" value=""></label></p>
     <p><button type="submit" id="enviar">Enviar</button></p>
   </form>
   <p class="ajuda"><a href="index.html">Voltar à ajuda</a></p>

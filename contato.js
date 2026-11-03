@@ -35,6 +35,7 @@
     ev.preventDefault();
     var d = {};
     ["nome", "email", "perfil", "categoria", "assunto", "mensagem"].forEach(function (k) { d[k] = form.elements[k].value.trim(); });
+    d.website = form.elements.website ? form.elements.website.value : ""; // campo-isca anti-robô (DEC-169): sempre vazio para gente
     if (!d.nome || !d.email || !d.assunto || !d.mensagem) { aviso.textContent = "Preencha todos os campos."; return; }
     var botao = document.getElementById("enviar");
     botao.disabled = true;
@@ -42,7 +43,13 @@
       .then(function (r) {
         if (r.status === 204) { form.reset(); aviso.textContent = "Mensagem enviada. Respondemos por e-mail."; }
         else if (r.status === 422) aviso.textContent = "Confira os campos e tente de novo.";
-        else if (r.status === 429) aviso.textContent = "Muitas mensagens em pouco tempo. Tente mais tarde.";
+        else if (r.status === 429) {
+          return r.json().catch(function () { return {}; }).then(function (j) {
+            aviso.textContent = j && j.code === "SUPPORT_DAILY_LIMIT"
+              ? "Você chegou ao limite de mensagens de hoje. Tente amanhã."
+              : "Muitas mensagens em pouco tempo. Tente mais tarde.";
+          });
+        }
         else aviso.textContent = "Não foi possível enviar agora. Tente de novo em instantes.";
       })
       .catch(function () { aviso.textContent = "Sem conexão. Tente de novo."; })

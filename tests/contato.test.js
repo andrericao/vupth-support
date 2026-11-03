@@ -55,6 +55,26 @@ describe("contato", () => {
     expect(document.getElementById("enviar").disabled).toBe(false);
   });
 
+  test("envia o campo-isca website vazio", async () => {
+    pagina("contato.html", "/contato.html");
+    fetchFalso({ "/support/contact": { status: 204 } });
+    roda("contato.js");
+    preenche(completo);
+    document.getElementById("form").dispatchEvent(new Event("submit", { cancelable: true }));
+    await espera();
+    expect(JSON.parse(fetch.mock.calls[0][1].body).website).toBe("");
+  });
+
+  test("429 SUPPORT_DAILY_LIMIT mostra a frase do limite diário", async () => {
+    pagina("contato.html", "/contato.html");
+    fetchFalso({ "/support/contact": { status: 429, corpo: { code: "SUPPORT_DAILY_LIMIT" } } });
+    roda("contato.js");
+    preenche(completo);
+    document.getElementById("form").dispatchEvent(new Event("submit", { cancelable: true }));
+    await espera();
+    expect(document.getElementById("aviso").textContent).toBe("Você chegou ao limite de mensagens de hoje. Tente amanhã.");
+  });
+
   test("sem conexão", async () => {
     pagina("contato.html", "/contato.html");
     fetchFalso({});
