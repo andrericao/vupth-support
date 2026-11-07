@@ -297,3 +297,6 @@ h2, h3 { font-weight: 700; } /* heading */
 #lista article h2 { margin: 0; font-family: var(--font-heading); font-size: var(--fs-md); }
 #lista article p { margin: var(--sp-1) 0; color: inherit; font-size: var(--fs-sm); }
 #lista article p.valor { font-family: var(--font-heading); font-weight: 800; font-size: var(--fs-xxl); letter-spacing: -1px; color: inherit; }
+
+/* artigos-por-recurso: faixa quando a chave não vale para todos */
+.faixa-parcial { background: var(--surface-alt); color: var(--on-green-tint); border-radius: var(--radius-xl); padding: var(--sp-3) var(--sp-4); margin: var(--sp-4) 0; font-size: var(--fs-sm); font-weight: 600; }

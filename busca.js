@@ -5,6 +5,9 @@
   "use strict";
 
   var INDICES = ["/indice-cliente.json", "/indice-parceiro.json"];
+  // artigos-por-recurso: só aparecem os artigos que o Backend lista como visíveis (sem resposta = ocultos).
+  var INDICE_RECURSOS = "/indice-recursos.json";
+  var RECURSOS = "https://vupth-backend-ia.onrender.com/features/articles";
 
   // home-por-perfil + separacao-melhor (SUP-12, SUP-4): primeiro o perfil,
   // depois a categoria. Cada um tem URL própria (/cliente/passo-a-passo), para
@@ -231,6 +234,7 @@
       lista.appendChild(el("li", {}, [
         el("a", { href: "/" + x.a.arquivo, texto: x.a.titulo }),
         rotuloDoPublico(x.a),
+        x.a.parcial ? el("span", { class: "publico", texto: "Em liberação" }) : null,
         el("p", { texto: x.a.resumo }),
       ]));
     });
@@ -239,10 +243,17 @@
   }
 
   function carrega() {
-    return Promise.all(INDICES.map(function (url) {
-      return fetch(url).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; });
-    })).then(function (listas) {
-      artigos = [].concat.apply([], listas).map(prepara);
+    var le = function (url) { return fetch(url).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); };
+    return Promise.all(INDICES.map(le).concat([le(INDICE_RECURSOS), le(RECURSOS)])).then(function (listas) {
+      var visiveis = listas.pop(), recursos = listas.pop();
+      var base = [].concat.apply([], listas);
+      recursos.forEach(function (a) {
+        var v = visiveis.filter(function (x) { return x.article_path === a.recurso; })[0];
+        if (!v) return;
+        a.parcial = v.release !== "ALL";
+        base.push(a);
+      });
+      artigos = base.map(prepara);
     });
   }
 

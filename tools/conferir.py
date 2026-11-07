@@ -50,7 +50,7 @@ for p in htmls:
             erros.append(f"{rel}: link quebrado '{ref}'")
 
 indexados = set()
-for nome in ("indice-cliente.json", "indice-parceiro.json"):
+for nome in ("indice-cliente.json", "indice-parceiro.json", "indice-recursos.json"):
     for x in json.loads((RAIZ / nome).read_text(encoding="utf-8")):
         indexados.add(x["arquivo"])
         for c in ("arquivo", "titulo", "resumo", "palavras", "categoria", "publico"):

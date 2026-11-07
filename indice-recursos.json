@@ -1,0 +1,12 @@
+[
+  {
+    "arquivo": "artigos/recursos/profissional-paga-taxa.html",
+    "recurso": "recursos/profissional-paga-taxa",
+    "titulo": "Taxas do app para o profissional",
+    "resumo": "O que são as taxas que aparecem riscadas, quando passam a ser descontadas e o que muda se você receber em mãos.",
+    "palavras": ["taxa", "taxas", "riscada", "desconto", "recebi", "receber em mãos", "profissional paga", "você recebe"],
+    "categoria": "Seu perfil",
+    "publico": "parceiro",
+    "perfis": ["profissional", "dono"]
+  }
+]
